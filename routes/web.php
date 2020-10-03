@@ -22,3 +22,7 @@ Route::get('/ban-cafe/{khuvuc_id}', 'CafeController@showBancafe');
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
 Route::get('/phong-karaoke/{loaiphong_id}', 'KaraokeController@showPhongKaraoke');
+
+//menu
+Route::get('/menu', 'MenuController@showLoaisp');
+Route::get('/menu-sanpham/{loaisanpham_id}', 'MenuController@showMenu');

@@ -12,8 +12,13 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class MenuController extends Controller
 {
-    public function showMenu(){
-        $all_sanpham=DB::table('tbl_sanpham')->orderby('sanpham_name','desc')->get();
-        return view('pages.menu')->with('all_sanpham',$all_sanpham);
+    public function showLoaisp(){
+        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
+        return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham);
+    }
+    public function showMenu($loaisanpham_id){
+        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
+        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
+        return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham);
     }
 }
