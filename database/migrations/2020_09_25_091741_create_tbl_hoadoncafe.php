@@ -20,6 +20,7 @@ class CreateTblHoadoncafe extends Migration
             $table->text('hoadoncafe_nguoi');
             $table->string('hoadoncafe_price');
             $table->integer('khachhang_id');
+            $table->integer('hoadoncafe_status');
         });
     }
 

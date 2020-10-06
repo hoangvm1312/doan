@@ -5,7 +5,7 @@
                         <div class="col-md list-filter-content">
                             @if(isset($all_khuvuc))
                                 @foreach ($all_khuvuc as $key=>$khuvuc)
-                                    <button class="btn btn-primary"><a style="text-decoration: none; color: white" href="{{URL::to('/ban-cafe/'.$khuvuc->khuvuc_id)}}">{{$khuvuc->khuvuc_name}}</a></button>
+                                    <button class="btn btn-primary"><a class="button-select" href="{{URL::to('/ban-cafe/'.$khuvuc->khuvuc_id)}}">{{$khuvuc->khuvuc_name}}</a></button>
                                 @endforeach
                             @endif   
                         </div>
@@ -22,7 +22,7 @@
                                                     if($bancafe->bancafe_status==1) echo 'class="tb-active"';
                                                 ?>
                                             > 
-                                                {{$bancafe->bancafe_name}}
+                                                <a href="{{URL::to('/cafe-select-product/'.$bancafe->bancafe_id)}}" class="button-select" >{{$bancafe->bancafe_name}}</a>
                                             </li>
                                         </form>
                                     @endforeach            

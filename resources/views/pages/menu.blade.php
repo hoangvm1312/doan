@@ -6,7 +6,7 @@
                         <div class="col-md list-filter-content">
                             @if(isset($all_loaisanpham))
                                 @foreach ($all_loaisanpham as $key=>$loaisp)
-                                    <button class="btn btn-primary"><a style="text-decoration: none; color: white" href="{{URL::to('/menu-sanpham/'.$loaisp->loaisanpham_id)}}">{{$loaisp->loaisanpham_name}}</a></button>
+                                    <button class="btn btn-primary"><a class="button-select" href="{{URL::to('/menu-sanpham/'.$loaisp->loaisanpham_id)}}">{{$loaisp->loaisanpham_name}}</a></button>
                                 @endforeach
                             @endif   
                         </div>

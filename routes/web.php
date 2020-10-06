@@ -18,6 +18,7 @@ Route::get('/', 'CafeController@showKhuvuc') ;
 //cafe
 Route::get('/khu-vuc', 'CafeController@showKhuvuc');
 Route::get('/ban-cafe/{khuvuc_id}', 'CafeController@showBancafe');
+Route::get('/cafe-select-product/{bancafe_id}', 'CafeController@selectProduct');
 
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');

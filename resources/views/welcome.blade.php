@@ -17,9 +17,9 @@
             <div class="row ft-tabs">
                 <div class="col-md-3">
                     <ul class="tabs-list">
-                        <li><a href="{{(URL::to('/'))}}" >Bàn cafe</a></li>
-                        <li><a href="{{URL::to('/loai-phong')}} " >Phòng Karaoke</a></li>
-                        <li><a href="{{URL::to('/menu')}}" >Thực đơn</a></li>
+                        <li><a  href="{{(URL::to('/'))}}" >Bàn cafe</a></li>
+                        <li><a  href="{{URL::to('/loai-phong')}}" >Phòng Karaoke</a></li>
+                        <li><a  href="{{URL::to('/menu')}}" >Thực đơn</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 cashier-search">
@@ -37,6 +37,8 @@
     <div class="container-fluid">
         <div class="row content">
            @yield('content')
+
+
         <div class="col-md-6 content-listmenu" id="content-listmenu">
                 <div class="row" id="bill-info">
                     <div class="col-md-2 table-infor">                     
@@ -55,7 +57,14 @@
                               <th scope="col"></th>
                             </tr>
                           </thead>
-                          <tbody id="pro_search_append">
+                          <tbody>
+                            
+                            <th scope="col">1</th>
+                            <th scope="col">Thuốc lá</th>
+                            <th scope="col">123</th>
+                            <th scope="col">1000</th>
+                            <th scope="col">3000</th>
+                            <th scope="col"></th>
                           </tbody>
                         </table>
                     </div>
@@ -98,10 +107,6 @@
                     </div>
                 </div>
             </div>     
-
-
-
-
 
 
 

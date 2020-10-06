@@ -5,7 +5,7 @@
                         <div class="col-md list-filter-content">
                             @if(isset($all_loaiphong))
                                 @foreach ($all_loaiphong as $key=>$loaiphong)
-                                    <button class="btn btn-primary"><a style="text-decoration: none; color: white" href="{{URL::to('/phong-karaoke/'.$loaiphong->loaiphong_id)}}">{{$loaiphong->loaiphong_name}}</a></button>
+                                    <button class="btn btn-primary"><a class='button-select' href="{{URL::to('/phong-karaoke/'.$loaiphong->loaiphong_id)}}">{{$loaiphong->loaiphong_name}}</a></button>
                                 @endforeach
                             @endif   
                         </div>
@@ -22,7 +22,7 @@
                                                     if($phong->phong_status==1) echo 'class="tb-active"';
                                                 ?>
                                             > 
-                                                {{$phong->phong_name}}
+                                                <a href="#" class='button-select'>{{$phong->phong_name}}</a>
                                             </li>
                                         </form>
                                     @endforeach            

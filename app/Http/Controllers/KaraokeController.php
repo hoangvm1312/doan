@@ -14,8 +14,12 @@ session_start();
 class KaraokeController extends Controller
 {
     public function showLoaiphong(){
+        /*$all_loaiphong=DB::table('tbl_loaiphong')->get();
+        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong);*/
+        $loaiphong_id=1;
         $all_loaiphong=DB::table('tbl_loaiphong')->get();
-        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong);
+        $all_phong=DB::table('tbl_phong')->where('loaiphong_id',$loaiphong_id)->get();
+        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong)->with('all_phong',$all_phong);
     }
 
     public function showPhongKaraoke($loaiphong_id){
