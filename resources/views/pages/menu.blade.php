@@ -33,6 +33,79 @@
                     </div>
                 </div>
             </div>
+
+
+
             <!-- bill -->  
-             
+             <div class="col-md-6 content-listmenu" id="content-listmenu">
+                <div class="row" id="bill-info">
+                    <div class="col-md-2 table-infor">                     
+                    </div>
+                </div>
+                <div class="row bill-detail">
+                    <div class="col-md-12 bill-detail-content">
+                        <table class="table table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th scope="col">STT</th>
+                              <th scope="col">Tên sản phẩm</th>
+                              <th scope="col">Số lượng</th>
+                              <th scope="col">Gía bán</th>
+                              <th scope="col">Thành Tiền</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @if(isset($all_hoadon))
+                                @foreach($all_hoadon as $key=>$hoadon)
+                                    <th scope="col">1</th>
+                                    <th scope="col">Thuốc lá</th>
+                                    <th scope="col">123</th>
+                                    <th scope="col">1000</th>
+                                    <th scope="col">3000</th>
+                                    <th scope="col"></th>
+                                @endforeach
+                            @endif
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row bill-action">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12 p-1">
+                                <textarea class="form-control" id="note-order" placeholder="Nhập ghi chú hóa đơn" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6 p-1">
+                                <button type="button" class="btn-print" onclick="cms_save_table()"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh Toán (F9)</button>
+                            </div>
+                            <div class="col-md-6 col-xs-6 p-1">
+                                <button type="button" class="btn-pay" onclick="cms_save_oder()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu (F10)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
+                            <div class="col-md-8">
+                                <input type="text" value="0" class="form-control total-pay" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-form-label col-md-4"><b>Khách Đưa</b></label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer-pay" value="0" placeholder="Nhập số điền khách đưa">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-form-label col-md-4"><b>Tiền thừa</b></label>
+                            <div class="col-md-8 excess-cash">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 @endsection

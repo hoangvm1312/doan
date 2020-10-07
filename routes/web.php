@@ -18,7 +18,6 @@ Route::get('/', 'CafeController@showKhuvuc') ;
 //cafe
 Route::get('/khu-vuc', 'CafeController@showKhuvuc');
 Route::get('/ban-cafe/{khuvuc_id}', 'CafeController@showBancafe');
-Route::get('/cafe-select-product/{bancafe_id}', 'CafeController@selectProduct');
 
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
@@ -27,3 +26,6 @@ Route::get('/phong-karaoke/{loaiphong_id}', 'KaraokeController@showPhongKaraoke'
 //menu
 Route::get('/menu', 'MenuController@showLoaisp');
 Route::get('/menu-sanpham/{loaisanpham_id}', 'MenuController@showMenu');
+
+//bill
+Route::get('/cafe-select-product/{bancafe_id}', 'BillController@showBill');

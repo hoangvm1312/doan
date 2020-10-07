@@ -29,12 +29,7 @@ class CafeController extends Controller
         return view('pages.cafe')->with('all_khuvuc',$all_khuvuc)->with('all_bancafe',$all_bancafe);
     }
 
-    public function selectProduct($bancafe_id){
-        $loaisanpham_id=1;
-        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
-        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
-        return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham);
-    }
+    
 }
 
 
