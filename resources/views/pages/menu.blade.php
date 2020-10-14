@@ -58,12 +58,26 @@
                           <tbody>
                             @if(isset($all_hoadon))
                                 @foreach($all_hoadon as $key=>$hoadon)
-                                    <th scope="col">1</th>
-                                    <th scope="col">Thuốc lá</th>
-                                    <th scope="col">123</th>
-                                    <th scope="col">1000</th>
-                                    <th scope="col">3000</th>
-                                    <th scope="col"></th>
+                                <tr>
+                                    <td scope="col">1</th>
+                                    <td scope="col">{{$hoadon->sanpham_name}}</td>
+                                    <td>
+                                        <div class="input-group spinner">
+                                            <a href="{{URL::to('/minus/'.$hoadon->sanpham_id.'/'.$hoadon->hoadoncafe_id)}}" class="button-select"><button name="minus" class="input-group-prepend btn btn-default"><i class="fa fas fa-minus"></i></button></a>
+                                            <input type="text" class="form-control quantity-product-oders" name="" value="{{$hoadon->hoadoncafeDetail_nums}}">
+                                            <a href="{{URL::to('/plus/'.$hoadon->sanpham_id.'/'.$hoadon->hoadoncafe_id)}}" class="button-select"><button name="plus" class="input-group-prepend btn btn-default"><i class="fa fas fa-plus"></i></button></a>
+                                        </div>
+                                    </td>
+
+                                    <td scope="col">{{$hoadon->sanpham_price}}</td>
+                                    <td  class="text-center total-money">{{$hoadon->hoadoncafeDetail_nums*$hoadon->sanpham_price}}</td>
+                                    <td class="text-center">
+                                        <a href="{{URL::to('/delete/'.$hoadon->sanpham_id)}}" class="button-select"><button name="delete" action="submit">
+                                            <i class="fa fa-times-circle del-pro-order"></i>
+                                        </button>
+                                        </a>
+                                    </td>
+                                </tr>
                                 @endforeach
                             @endif
                           </tbody>
@@ -86,6 +100,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-md-6">
                         <div class="row form-group">
                             <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
