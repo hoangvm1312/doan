@@ -30,5 +30,6 @@ Route::get('/menu-sanpham/{loaisanpham_id}', 'MenuController@showMenu');
 //bill
 Route::get('/cafe-select-product/{bancafe_id}', 'BillController@showBill');
 Route::get('/plus/{sanpham_id}/{hoadoncafe_id}', 'BillController@plusProduct');
-Route::get('/minus/{sanpham_id}', 'BillController@minusProduct');
-Route::get('/delete/{sanpham_id}', 'BillController@deleteProduct');
+Route::get('/minus/{sanpham_id}/{hoadoncafe_id}', 'BillController@minusProduct');
+Route::get('/delete/{sanpham_id}/{hoadoncafe_id}', 'BillController@deleteProduct');
+Route::get('/choose-product/{sanpham_id}/{ban_id}', 'BillController@chooseProduct');

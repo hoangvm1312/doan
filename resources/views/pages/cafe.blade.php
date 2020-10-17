@@ -22,7 +22,7 @@
                                                     if($bancafe->bancafe_status==1) echo 'class="tb-active"';
                                                 ?>
                                             > 
-                                                <a href="{{URL::to('/cafe-select-product/'.$bancafe->bancafe_id)}}" class="button-select" >{{$bancafe->bancafe_name}}</a>
+                                                <a href="{{URL::to('/cafe-select-product/'.$bancafe->bancafe_id)}}" class="button-select">{{$bancafe->bancafe_name}}</a>
                                             </li>
                                         </form>
                                     @endforeach            

@@ -16,7 +16,12 @@
                         <ul>
                             @if(isset ($all_sanpham))
                                 @foreach ($all_sanpham as $key=>$sanpham)
-                                    <li><a href="#" onclick="" title="">
+                                    <li>
+                                        @if(isset($ban_id))
+                                        <a href="{{URL::to('/choose-product/'.$sanpham->sanpham_id.'/'.$ban_id)}}">
+                                        
+                                        @else <a href="{{URL::to('/choose-product/'.$sanpham->sanpham_id)}}"> 
+                                        @endif
                                         <div class="img-product">
                                             <img src="{{('../public/uploads/product/'.$sanpham->sanpham_image)}}">
                                         </div>
@@ -72,7 +77,7 @@
                                     <td scope="col">{{$hoadon->sanpham_price}}</td>
                                     <td  class="text-center total-money">{{$hoadon->hoadoncafeDetail_nums*$hoadon->sanpham_price}}</td>
                                     <td class="text-center">
-                                        <a href="{{URL::to('/delete/'.$hoadon->sanpham_id)}}" class="button-select"><button name="delete" action="submit">
+                                        <a href="{{URL::to('/delete/'.$hoadon->sanpham_id.'/'.$hoadon->hoadoncafe_id)}}" class="button-select"><button name="delete" action="submit">
                                             <i class="fa fa-times-circle del-pro-order"></i>
                                         </button>
                                         </a>
