@@ -26,13 +26,11 @@ class CafeController extends Controller
     public function showBancafe($khuvuc_id){
         $all_khuvuc=DB::table('tbl_khuvuc')->get();
         $all_bancafe=DB::table('tbl_bancafe')->where('khuvuc_id',$khuvuc_id)->get();    
-
         $all_bancafe=DB::table('tbl_bancafe')
         ->where('tbl_bancafe.khuvuc_id',$khuvuc_id)
         ->get();
-        /*->max('tbl_hoadoncafe.hoadoncafe_id');*/
-
-        return view('pages.cafe')->with('all_khuvuc',$all_khuvuc)->with('all_bancafe',$all_bancafe);
+        $loaisanpham_id=DB::table('tbl_loaisanpham')->pluck('loaisanpham_id')->first();
+        return view('pages.cafe')->with('all_khuvuc',$all_khuvuc)->with('all_bancafe',$all_bancafe)->with('loaisanpham_id',$loaisanpham_id);
     }    
 }
 

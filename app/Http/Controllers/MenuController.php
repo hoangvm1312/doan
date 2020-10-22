@@ -13,9 +13,8 @@ session_start();
 class MenuController extends Controller
 {
     public function showLoaisp(){
-        $loaisanpham_id=1;
         $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
-        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
+        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',1)->get();
         return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham);
     }
     
@@ -23,5 +22,10 @@ class MenuController extends Controller
         $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
         $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
         return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham);
+    }
+    public function showLoaispTable($loaisanpham_id,$ban_id){
+        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
+        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
+        return Redirect::to('/cafe-select-product/'.$ban_id.'/'.$loaisanpham_id);
     }
 }

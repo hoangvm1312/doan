@@ -15,6 +15,7 @@
                         <div class="col-md table-list-content">
                             <ul>
                                 @if(isset($all_bancafe))
+                                    @if(isset($loaisanpham_id))
                                     @foreach($all_bancafe as $key=>$bancafe) 
                                         <form  method="post">
                                             <li
@@ -22,10 +23,11 @@
                                                     if($bancafe->bancafe_status==1) echo 'class="tb-active"';
                                                 ?>
                                             > 
-                                                <a href="{{URL::to('/cafe-select-product/'.$bancafe->bancafe_id)}}" class="button-select">{{$bancafe->bancafe_name}}</a>
+                                                <a href="{{URL::to('/cafe-select-product/'.$bancafe->bancafe_id.'/'.$loaisanpham_id)}}" class="button-select">{{$bancafe->bancafe_name}}</a>
                                             </li>
                                         </form>
-                                    @endforeach            
+                                    @endforeach
+                                    @endif            
                                 @endif   
                             </ul>
                         </div>

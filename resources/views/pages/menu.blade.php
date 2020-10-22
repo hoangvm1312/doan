@@ -3,10 +3,16 @@
 
 <div class="col-md-6" id="table-list">
                 <div class="row list-filter">
-                        <div class="col-md list-filter-content">
-                            @if(isset($all_loaisanpham))
+                        <div class="col-md list-filter-content"> <!-- Liệt kê loại sản phẩm -->
+                            @if(isset($all_loaisanpham)) 
                                 @foreach ($all_loaisanpham as $key=>$loaisp)
-                                    <button class="btn btn-primary"><a class="button-select" href="{{URL::to('/menu-sanpham/'.$loaisp->loaisanpham_id)}}">{{$loaisp->loaisanpham_name}}</a></button>
+                                    <button class="btn btn-primary">
+                                        @if(isset($ban_id))
+                                          <a class="button-select"  href="{{URL::to('/menu/'.$loaisp->loaisanpham_id.'/'.$ban_id)}}" >{{$loaisp->loaisanpham_name}}</a>
+                                        @else
+                                          <a class="button-select"  href="{{URL::to('/menu-sanpham/'.$loaisp->loaisanpham_id)}}" >{{$loaisp->loaisanpham_name}}</a>
+                                        @endif
+                                    </button>
                                 @endforeach
                             @endif   
                         </div>
@@ -14,7 +20,7 @@
                 <div class="row product-list">
                     <div class="col-md product-list-content">
                         <ul>
-                            @if(isset ($all_sanpham))
+                            @if(isset ($all_sanpham)) <!-- Liệt kê sản phẩm -->
                                 @foreach ($all_sanpham as $key=>$sanpham)
                                     <li>
                                         @if(isset($ban_id))
@@ -42,7 +48,7 @@
 
 
             <!-- bill -->  
-             <div class="col-md-6 content-listmenu" id="content-listmenu">
+             <div class="col-md-6 content-listmenu" id="content-listmenu"> <!-- Bảng hóa đơn -->
                 <div class="row" id="bill-info">
                     <div class="col-md-2 table-infor">                     
                     </div>
