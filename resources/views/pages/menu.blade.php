@@ -24,14 +24,15 @@
                                 @foreach ($all_sanpham as $key=>$sanpham)
                                     <li>
                                         @if(isset($ban_id))
-                                        <a href="{{URL::to('/choose-product/'.$sanpham->sanpham_id.'/'.$ban_id)}}">
-                                        
-                                        @else <a href="{{URL::to('/choose-product/'.$sanpham->sanpham_id)}}"> 
+                                            <a href="{{URL::to('/choose-product/'.$sanpham->sanpham_id.'/'.$ban_id)}}">
+                                        @else <a href="#"> 
                                         @endif
                                         <div class="img-product">
-                                            <img src="{{('../public/uploads/product/'.$sanpham->sanpham_image)}}">
+                                        @if(isset($ban_id))
+                                            <img src="{{('../../public/uploads/product/'.$sanpham->sanpham_image)}}">
+                                        @else <img src="{{('../public/uploads/product/'.$sanpham->sanpham_image)}}">
+                                        @endif
                                         </div>
-
                                         <div class="product-info">
                                             <span class="product-name">{{$sanpham->sanpham_name}}</span><br>
                                             <strong>{{$sanpham->sanpham_price}} VND</strong>

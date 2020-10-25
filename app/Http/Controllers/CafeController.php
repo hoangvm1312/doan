@@ -15,12 +15,8 @@ session_start();
 class CafeController extends Controller
 {
     public function showKhuvuc(){
-        /*$all_khuvuc=DB::table('tbl_khuvuc')->get();
-        return view('pages.cafe')->with('all_khuvuc',$all_khuvuc);*/
         $khuvuc_id=1;
-        $all_khuvuc=DB::table('tbl_khuvuc')->get();
-        $all_bancafe=DB::table('tbl_bancafe')->where('khuvuc_id',$khuvuc_id)->get();
-        return view('pages.cafe')->with('all_khuvuc',$all_khuvuc)->with('all_bancafe',$all_bancafe);
+        return Redirect::to('/ban-cafe/'.$khuvuc_id);
     }
 
     public function showBancafe($khuvuc_id){

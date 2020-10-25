@@ -24,7 +24,7 @@ Route::get('/menu', 'MenuController@showLoaisp');
 Route::get('/menu/{loaisanpham_id}/{ban_id}', 'MenuController@showLoaispTable');
 Route::get('/menu-sanpham/{loaisanpham_id}', 'MenuController@showMenu');
 
-//bill cafe
+//bill product
 Route::get('/cafe-select-product/{bancafe_id}/{loaisanpham_id}', 'BillController@showBill');
 Route::get('/plus/{sanpham_id}/{hoadoncafe_id}', 'BillController@plusProduct');
 Route::get('/minus/{sanpham_id}/{hoadoncafe_id}', 'BillController@minusProduct');
@@ -35,3 +35,4 @@ Route::get('/choose-product/{sanpham_id}/{ban_id}', 'BillController@chooseProduc
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
 Route::get('/phong-karaoke/{loaiphong_id}', 'KaraokeController@showPhongKaraoke');
+

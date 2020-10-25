@@ -13,9 +13,8 @@ session_start();
 class MenuController extends Controller
 {
     public function showLoaisp(){
-        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
-        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',1)->get();
-        return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham);
+        $loaisanpham_id=1;
+        return Redirect::to('/menu-sanpham/'.$loaisanpham_id);
     }
     
     public function showMenu($loaisanpham_id){

@@ -48,7 +48,7 @@ class BillController extends Controller
 
 
     	$bancafe_id=DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->pluck('bancafe_id')->first(); 
-    	return Redirect::to('/cafe-select-product/'.$bancafe_id);
+    	return Redirect::to('/cafe-select-product/'.$bancafe_id.'/'.$sanpham->loaisanpham_id);
     }
 
     public function minusProduct($sanpham_id,$hoadoncafe_id){
@@ -56,12 +56,7 @@ class BillController extends Controller
         $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
         $i=$hdDetail->hoadoncafeDetail_nums-1;
         if($i==0){
-            DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)
-            ->delete();
-            $bancafe_id=DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->pluck('bancafe_id')->first();
-            DB::table('tbl_bancafe')->where('bancafe_id',$bancafe_id)->update(['bancafe_status'=>0]);//Tắt hiện thị bàn
-            DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->delete();// Xóa hóa đơn
-            return Redirect::to('/cafe-select-product/'.$bancafe_id.'/'.$sanpham->loaisanpham_id);
+            return Redirect::to('/delete/'.$sanpham_id.'/'.$hoadoncafe_id);
         }
         DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)
         ->update(['hoadoncafeDetail_nums'=>$i]);
@@ -165,7 +160,6 @@ class BillController extends Controller
                     //cập nhật giá trong hóa đơn
                     $price_hd=DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$bill->hoadoncafe_id)->pluck('hoadoncafe_price')->first();
                     DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$bill->hoadoncafe_id)->update(['hoadoncafe_price'=>$price_hd+$sanpham->sanpham_price]);
-
 
                     return Redirect::to('/cafe-select-product/'.$ban_id.'/'.$sanpham->loaisanpham_id);
                 }
