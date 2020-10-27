@@ -21,7 +21,8 @@ class KaraokeController extends Controller
     public function showPhongKaraoke($loaiphong_id){
         $all_loaiphong=DB::table('tbl_loaiphong')->get();
         $all_phong=DB::table('tbl_phong')->where('loaiphong_id',$loaiphong_id)->get();
-        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong)->with('all_phong',$all_phong);
+        $loaisanpham_id=DB::table('tbl_loaisanpham')->pluck('loaisanpham_id')->first();
+        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong)->with('all_phong',$all_phong)->with('loaisanpham_id',$loaisanpham_id);
     }
 
     //copy

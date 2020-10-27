@@ -36,3 +36,13 @@ Route::get('/choose-product/{sanpham_id}/{ban_id}', 'BillController@chooseProduc
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
 Route::get('/phong-karaoke/{loaiphong_id}', 'KaraokeController@showPhongKaraoke');
 
+//menu karaoke
+Route::get('/menu-karaoke/{loaisanpham_id}/{ban_id}', 'MenuController@showLoaispTable_Karaoke');
+
+//bill karaoke
+Route::get('/karaoke-select-product/{phong_id}/{loaisanpham_id}', 'BillKaraokeController@showBill');
+Route::get('/plus-karaoke/{sanpham_id}/{hoadonkaraoke_id}', 'BillKaraokeController@plusProduct');
+Route::get('/minus-karaoke/{sanpham_id}/{hoadonkaraoke_id}', 'BillKaraokeController@minusProduct');
+Route::get('/delete-karaoke/{sanpham_id}/{hoadonkaraoke_id}', 'BillKaraokeController@deleteProduct');
+Route::get('/choose-product-karaoke/{sanpham_id}/{ban_id}', 'BillKaraokeController@chooseProduct');
+

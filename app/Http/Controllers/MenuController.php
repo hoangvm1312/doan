@@ -27,4 +27,14 @@ class MenuController extends Controller
         $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
         return Redirect::to('/cafe-select-product/'.$ban_id.'/'.$loaisanpham_id);
     }
+
+
+    //Karaoke
+    
+    
+    public function showLoaispTable_Karaoke($loaisanpham_id,$ban_id){
+        $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
+        $all_sanpham=DB::table('tbl_sanpham')->where('loaisanpham_id',$loaisanpham_id)->get();
+        return Redirect::to('/karaoke-select-product/'.$ban_id.'/'.$loaisanpham_id);
+    }
 }

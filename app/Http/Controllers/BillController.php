@@ -25,9 +25,15 @@ class BillController extends Controller
         ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_hoadoncafeDetail.hoadoncafe_id')
         ->where('bancafe_id',$bancafe_id)
         ->get();
+
+        $price_hoadon=0;
+        foreach($all_hoadon as $key=>$value){ //Tính tổng tiền hóa đơn
+            $price_hoadon=$price_hoadon+$value->hoadoncafeDetail_price;
+        }
+        
     	
         return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham)
-        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id);
+        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id)->with('price_hoadon',$price_hoadon);
     }
 
     public function plusProduct($sanpham_id,$hoadoncafe_id){
@@ -74,6 +80,7 @@ class BillController extends Controller
     }
 
     public function deleteProduct($sanpham_id,$hoadoncafe_id){
+        $price_hdDetail_xoa=DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)->pluck('hoadoncafeDetail_price')->first();
         DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)
         ->delete();
         $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
@@ -82,6 +89,13 @@ class BillController extends Controller
         if(is_null(($check))){
             DB::table('tbl_bancafe')->where('bancafe_id',$bancafe_id)->update(['bancafe_status'=>0]);
             DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->delete();// Xóa hóa đơn
+        }
+        else{
+            //update gía hoadoncafe trong csdl
+            $hd_detail=DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)->get();
+            $price_total=DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->pluck('hoadoncafe_price')->first(); 
+            DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->update(['hoadoncafe_price'=>$price_total-$price_hdDetail_xoa]);
+
         }
         return Redirect::to('/cafe-select-product/'.$bancafe_id.'/'.$sanpham->loaisanpham_id);
     }
