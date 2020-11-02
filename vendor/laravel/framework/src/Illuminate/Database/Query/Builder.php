@@ -2045,8 +2045,6 @@ class Builder
     /**
      * Remove all existing orders and optionally add a new order.
      *
-     * @param  string|null  $column
-     * @param  string  $direction
      * @return $this
      */
     public function reorder($column = null, $direction = 'asc')

@@ -870,7 +870,7 @@ class TestResponse implements ArrayAccess
         $this->ensureResponseHasView();
 
         if (is_null($value)) {
-            PHPUnit::assertTrue(Arr::has($this->original->gatherData(), $key));
+            PHPUnit::assertArrayHasKey($key, $this->original->gatherData());
         } elseif ($value instanceof Closure) {
             PHPUnit::assertTrue($value(Arr::get($this->original->gatherData(), $key)));
         } elseif ($value instanceof Model) {
@@ -924,7 +924,7 @@ class TestResponse implements ArrayAccess
     {
         $this->ensureResponseHasView();
 
-        PHPUnit::assertFalse(Arr::has($this->original->gatherData(), $key));
+        PHPUnit::assertArrayNotHasKey($key, $this->original->gatherData());
 
         return $this;
     }

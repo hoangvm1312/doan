@@ -24,16 +24,23 @@ class BillController extends Controller
         ->join('tbl_sanpham','tbl_sanpham.sanpham_id','=','tbl_hoadoncafeDetail.sanpham_id')
         ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_hoadoncafeDetail.hoadoncafe_id')
         ->where('bancafe_id',$bancafe_id)
+        ->where('tbl_hoadoncafe.hoadoncafe_status',1)
         ->get();
+
+
+        $hoadon_id=DB::table('tbl_hoadoncafe')
+        ->where('hoadoncafe_status',1)
+        ->where('bancafe_id',$bancafe_id)
+        ->pluck('hoadoncafe_id')->first();
+        
 
         $price_hoadon=0;
         foreach($all_hoadon as $key=>$value){ //Tính tổng tiền hóa đơn
             $price_hoadon=$price_hoadon+$value->hoadoncafeDetail_price;
         }
-        
-    	
+          	
         return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham)
-        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id)->with('price_hoadon',$price_hoadon);
+        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id)->with('price_hoadon',$price_hoadon)->with('hoadoncafe_id',$hoadon_id);
     }
 
     public function plusProduct($sanpham_id,$hoadoncafe_id){

@@ -24,9 +24,21 @@ class BillKaraokeController extends Controller
         ->join('tbl_sanpham','tbl_sanpham.sanpham_id','=','tbl_hoadonkaraokeDetail.sanpham_id')
         ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_hoadonkaraokeDetail.hoadonkaraoke_id')
         ->where('phong_id',$phong_id)
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_status',0)
         ->get();
+
+        $hoadon=DB::table('tbl_hoadonkaraoke')
+        ->where('hoadonkaraoke_status',1)
+        ->where('phong_id',$phong_id)
+        ->first();
+
+        $phong_price=DB::table('tbl_phong')
+        ->join('tbl_loaiphong','tbl_loaiphong.loaiphong_id','=','tbl_phong.loaiphong_id')
+        ->where('phong_id',$phong_id)
+        ->pluck('loaiphong_price')
+        ->first();
     	
-        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('ban_id',$phong_id);
+        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('phong_price',$phong_price);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){
@@ -166,5 +178,29 @@ class BillKaraokeController extends Controller
                 
                 
         }
+    }
+
+    public function checkout($hoadonkaraoke_id,$phong_id){
+        $timenow=Carbon::now('Asia/Ho_Chi_Minh');
+        $hoadonkaraoke=DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->first();
+        //Cập nhật giờ ra
+        DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_timeout'=>$timenow]);
+        //Tính thời gian khách sử dụng phòng
+        $timeUse=$timenow->diffInMinutes($hoadonkaraoke->hoadonkaraoke_timein)/60;
+        number_format((float)$timeUse, 1, '.', '');
+        echo($timeUse);
+        DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_time'=>$timeUse]);
+        //lấy giá loại phòng
+        $loaiphong_price= DB::table('tbl_phong')
+        ->where('tbl_phong.phong_id',$phong_id)
+        ->join('tbl_loaiphong','tbl_phong.loaiphong_id','=','tbl_loaiphong.loaiphong_id')
+        ->pluck('tbl_loaiphong.loaiphong_price')->first();
+        //Tính tổng tiền
+        $money=$hoadonkaraoke->hoadonkaraoke_price+$loaiphong_price*$timeUse;
+
+        //Cập nhật tổng tiền vào csdl
+        DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_price'=>$money]);
+        //Chuyển sang in hóa đơn
+        return Redirect::to('/thanh-toan-karaoke/'.$hoadonkaraoke_id.'/'.$loaiphong_price);
     }
 }

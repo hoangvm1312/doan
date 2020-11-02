@@ -7,8 +7,8 @@
                             @if(isset($all_loaisanpham)) 
                                 @foreach ($all_loaisanpham as $key=>$loaisp)
                                     <button class="btn btn-primary">
-                                        @if(isset($ban_id))
-                                          <a class="button-select"  href="{{URL::to('/menu-karaoke/'.$loaisp->loaisanpham_id.'/'.$ban_id)}}" >{{$loaisp->loaisanpham_name}}</a>
+                                        @if(isset($phong_id))
+                                          <a class="button-select"  href="{{URL::to('/menu-karaoke/'.$loaisp->loaisanpham_id.'/'.$phong_id)}}" >{{$loaisp->loaisanpham_name}}</a>
                                         @else
                                           <a class="button-select"  href="{{URL::to('/menu-sanpham/'.$loaisp->loaisanpham_id)}}" >{{$loaisp->loaisanpham_name}}</a>
                                         @endif
@@ -23,12 +23,12 @@
                             @if(isset ($all_sanpham)) <!-- Liệt kê sản phẩm -->
                                 @foreach ($all_sanpham as $key=>$sanpham)
                                     <li>
-                                        @if(isset($ban_id))
-                                            <a href="{{URL::to('/choose-product-karaoke/'.$sanpham->sanpham_id.'/'.$ban_id)}}">
+                                        @if(isset($phong_id))
+                                            <a href="{{URL::to('/choose-product-karaoke/'.$sanpham->sanpham_id.'/'.$phong_id)}}">
                                         @else <a href="#"> 
                                         @endif
                                         <div class="img-product">
-                                        @if(isset($ban_id))
+                                        @if(isset($phong_id))
                                             <img src="{{('../../public/uploads/product/'.$sanpham->sanpham_image)}}">
                                         @else <img src="{{('../public/uploads/product/'.$sanpham->sanpham_image)}}">
                                         @endif
@@ -49,7 +49,16 @@
 
 
             <!-- bill -->  
+            
              <div class="col-md-6 content-listmenu" id="content-listmenu"> <!-- Bảng hóa đơn -->
+                <!-- Thời gian vào -->
+                <div class="input-group spinner" style="width: 700px ; height: 20px">
+                @if(isset($hoadon->hoadonkaraoke_timein))
+                <input  type="text" class="form-control quantity-product-oders" value="Thời gian vào: {{$hoadon->hoadonkaraoke_timein}}">
+                @endif
+                <input  type="text" class="form-control quantity-product-oders" value=" Giá phòng: {{$phong_price}} VNĐ">
+            </div><!-- END Thời gian vào -->
+
                 <div class="row" id="bill-info">
                     <div class="col-md-2 table-infor">                     
                     </div>
@@ -105,7 +114,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-xs-6 p-1">
-                                <a href="" class='button-select'><button type="button" class="btn-print"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh Toán</button></a>
+                                @if(isset($hoadon))
+                                <a href="{{URL::to('/check-out-karaoke/'.$hoadon->hoadonkaraoke_id.'/'.$phong_id)}}" class='button-select'  target="_blank">
+                                @else 
+                                    <a href="#" class='button-select'>
+                                @endif
+                                    <button type="button" class="btn-print"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh Toán
+                                    </button>
+                                </a>
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
                                 <a href="" class='button-select'><button type="button" class="btn-pay"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ</button></a>

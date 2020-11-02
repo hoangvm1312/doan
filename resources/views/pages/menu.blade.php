@@ -100,14 +100,22 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-6 col-xs-6 p-1">
-                                <a href="{{URL::to('/thanh-toan-cafe')}}" class='button-select'>
-                                    <button type="button" class="btn-print" onclick="cms_save_table()"><i class="fa fa-credit-card" aria-hidden="true"></i>Thanh Toán
+                                @if(isset($hoadoncafe_id))
+                                <a href="{{URL::to('/thanh-toan-cafe/'.$hoadoncafe_id)}}" class='button-select'  target="_blank">
+                                @else 
+                                    <a href="#" class='button-select'>
+                                @endif
+                                    <button type="button" class="btn-print"><i class="fa fa-credit-card" aria-hidden="true"></i> Thanh Toán
                                     </button>
                                 </a>
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
-                                <a href="{{URL::to('/cong-no-karaoke')}}" class='button-select'>
-                                    <button type="button" class="btn-pay" onclick="cms_save_oder()"><i class="fa fa-floppy-o" aria-hidden="true"></i>Lưu công nợ
+                                @if(isset($hoadoncafe_id))
+                                    <a href="{{URL::to('/cong-no-cafe'.$hoadoncafe_id)}}" class='button-select'>
+                                @else
+                                    <a href="#" class='button-select'>
+                                @endif
+                                    <button type="button" class="btn-pay" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ
                                     </button>
                                 </a>
                             </div>

@@ -732,7 +732,7 @@ trait EnumeratesValues
      *
      * This is an alias to the "takeUntil" method.
      *
-     * @param  mixed  $value
+     * @param  mixed  $key
      * @return static
      *
      * @deprecated Use the "takeUntil" method directly.

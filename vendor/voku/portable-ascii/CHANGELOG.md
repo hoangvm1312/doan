@@ -1,9 +1,5 @@
 # Changelog
 
-### 1.5.3 (2020-07-23)
-
-- fix "Georgian" char-mapping (thanks @waska14)
-
 ### 1.5.2 (2020-06-16)
 
 - add "Bengali" (bn) language support (thanks @eliyas5044)

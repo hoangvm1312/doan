@@ -1210,7 +1210,7 @@ class Collection implements ArrayAccess, Enumerable
     /**
      * Take items in the collection until the given condition is met.
      *
-     * @param  mixed  $value
+     * @param  mixed  $key
      * @return static
      */
     public function takeUntil($value)
@@ -1221,7 +1221,7 @@ class Collection implements ArrayAccess, Enumerable
     /**
      * Take items in the collection while the given condition is met.
      *
-     * @param  mixed  $value
+     * @param  mixed  $key
      * @return static
      */
     public function takeWhile($value)
