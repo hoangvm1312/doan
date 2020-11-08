@@ -24,7 +24,7 @@ class BillKaraokeController extends Controller
         ->join('tbl_sanpham','tbl_sanpham.sanpham_id','=','tbl_hoadonkaraokeDetail.sanpham_id')
         ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_hoadonkaraokeDetail.hoadonkaraoke_id')
         ->where('phong_id',$phong_id)
-        ->where('tbl_hoadonkaraoke.hoadonkaraoke_status',0)
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_status',1)
         ->get();
 
         $hoadon=DB::table('tbl_hoadonkaraoke')
@@ -37,8 +37,13 @@ class BillKaraokeController extends Controller
         ->where('phong_id',$phong_id)
         ->pluck('loaiphong_price')
         ->first();
+
+        $price_hoadon=0;
+        foreach($all_hoadon as $key=>$value){ //Tính tổng tiền hóa đơn
+            $price_hoadon=$price_hoadon+$value->hoadonkaraokeDetail_price;
+        }
     	
-        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('phong_price',$phong_price);
+        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){

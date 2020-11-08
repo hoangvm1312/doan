@@ -18,6 +18,7 @@ class OrderController extends Controller
     public function print_bill_cafe($hoadoncafe_id){//mã hóa đơn
     	$pdf = \App::make('dompdf.wrapper');
     	$pdf->loadHTML($this->print_order_convert_cafe($hoadoncafe_id));
+        $pdf->setPaper('A5');
     	return $pdf->stream();
     }
     public function print_order_convert_cafe($hoadoncafe_id){
@@ -27,7 +28,10 @@ class OrderController extends Controller
     	->where('tbl_hoadoncafeDetail.hoadoncafe_id',$hoadoncafe_id)
     	->get();	
 
-        
+        $check=DB::table('tbl_congnocafe')
+        ->where('hoadoncafe_id',$hoadoncafe_id)
+        ->pluck('congnocafe_status')
+        ->first();
 
 
     	$output='';
@@ -35,17 +39,32 @@ class OrderController extends Controller
     		font-family: Dejavu Sans;
     	}
     	.table-styling{
-    		border:1px solid #000;
+    		border:1px solid black;
+            width:500px;
+            height:auto;
     	}
+        .table-styling, th, td {
+            border: 1px solid black;
+
+        }
+        
     	</style>
     	<h4><center>Công ty TNHH Tín Thành Việt Mỹ</center></h4>
-    	<h4><center>____________________</center></h4>
-    	<h4><center>Hóa đơn thanh toán cafe</center></h4>
+    	<h4><center>____________________</center></h4>';
+        if($check==1){
+            $output.='<h4 style="font-family: Dejavu Sans;"><center>Hóa đơn công nợ cafe</center></h4>';
+        }
+        else{
+            $output.='<h4><center>Hóa đơn thanh toán cafe</center></h4>';
+        }
+
+        $output.='
+    	
     	<h4><center>Mã hóa đơn: '.$hoadon->hoadoncafe_id.'</center></h4>
     	<h4><center>Thời gian: '.$hoadon->hoadoncafe_time.'</center></h4>
     	<table class="table-styling">
     		<thead>
-    			<tr>
+    			<tr >
     				<th>Sản phẩm</th>
     				<th>Số lượng</th>
     				<th>Đơn giá</th>	
@@ -58,9 +77,9 @@ class OrderController extends Controller
 
     			<tr>	
     				<td>'.$value->sanpham_name.'</td>
-    				<td>'.$value->hoadoncafeDetail_nums.'</td>
-    				<td>'.$value->sanpham_price.'</td>
-    				<td>'.$value->hoadoncafeDetail_nums*$value->sanpham_price.'</td>
+    				<td><center>'.$value->hoadoncafeDetail_nums.'</center></td>
+    				<td>'.$value->sanpham_price.' VNĐ</td>
+    				<td>'.$value->hoadoncafeDetail_nums*$value->sanpham_price.' VNĐ</td>
     			</tr>';
     		}
     		$output.='
@@ -68,7 +87,7 @@ class OrderController extends Controller
     				<td><strong>Tổng cộng: </strong></td>
     				<td></td>
     				<td></td>
-    				<td><strong>'.$hoadon->hoadoncafe_price.'</strong></td>
+    				<td><strong>'.$hoadon->hoadoncafe_price.' VNĐ</strong></td>
     				
     			</tr>';
     		$output.='
@@ -82,6 +101,8 @@ class OrderController extends Controller
 
     	return $output;
     }
+
+
 
     public function print_bill_karaoke($hoadonkaraoke_id,$loaiphong_price){//mã hóa đơn
         $pdf = \App::make('dompdf.wrapper');
@@ -110,6 +131,10 @@ class OrderController extends Controller
         .table-styling{
             border:1px solid #000;
         }
+        .table-styling, th, td {
+            border: 1px solid black;
+
+        }
         </style>
         <h4><center>Công ty TNHH Tín Thành Việt Mỹ</center></h4>
         <h4><center>____________________</center></h4>
@@ -132,16 +157,16 @@ class OrderController extends Controller
 
                 <tr>    
                     <td>'.$value->sanpham_name.'</td>
-                    <td>'.$value->hoadonkaraokeDetail_nums.'</td>
-                    <td>'.$value->sanpham_price.'</td>
-                    <td>'.$value->hoadonkaraokeDetail_nums*$value->sanpham_price.'</td>
+                    <td><center>'.$value->hoadonkaraokeDetail_nums.'</center></td>
+                    <td>'.$value->sanpham_price.' VNĐ</td>
+                    <td>'.$value->hoadonkaraokeDetail_nums*$value->sanpham_price.' VNĐ</td>
                 </tr>';
             }
             $output.='
                 <tr>
                     <td>'.$tenphong.'</td>
                     <td>'.$hoadon->hoadonkaraoke_time.' giờ</td>
-                    <td>'.$loaiphong_price.'</td>
+                    <td>'.$loaiphong_price.' VNĐ</td>
                     <td>'.$loaiphong_price*$hoadon->hoadonkaraoke_time.'</td>
                 </tr>';
             $output.='
@@ -149,7 +174,7 @@ class OrderController extends Controller
                     <td><strong>Tổng cộng: </strong></td>
                     <td></td>
                     <td></td>
-                    <td><strong>'.$hoadon->hoadonkaraoke_price.'</strong></td>
+                    <td><strong>'.$hoadon->hoadonkaraoke_price.' VNĐ</strong></td>
                 </tr>';
             $output.='
             </tbody>

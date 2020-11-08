@@ -22,27 +22,15 @@
                         <li><a  href="{{URL::to('/menu')}}" >Thực đơn</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 cashier-search">
-                    <input type="text" name="txtnamemenu" id="search-menu" placeholder="Nhập tên mặt hàng" class="form-control">
-                    <div id="result-menu-post">
-                        
-                    </div>
-                </div>
+                <a class='button-selected' href="{{URL::to('/thanh-toan-cong-no')}}"><button style="margin-left: 900px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
             </div>
         </div>
     </div>
 <!-- end bar -->
 
-
     <div class="container-fluid">
         <div class="row content">
            @yield('content')
-
-
-             
-
-
-
         </div>
     </div>
 </div>

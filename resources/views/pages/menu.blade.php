@@ -111,11 +111,11 @@
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadoncafe_id))
-                                    <a href="{{URL::to('/cong-no-cafe'.$hoadoncafe_id)}}" class='button-select'>
+                                    <a href="{{URL::to('/cong-no-cafe/'.$hoadoncafe_id)}}" class='button-select' target="_blank">
                                 @else
                                     <a href="#" class='button-select'>
                                 @endif
-                                    <button type="button" class="btn-pay" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ
+                                    <button type="button" class="btn-pay"  ><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ
                                     </button>
                                 </a>
                             </div>
@@ -124,7 +124,7 @@
 
 
                     <div class="col-md-6">
-                        <div class="row form-group">
+                        <div class="row form-group" style='padding-top:10px'>
                             <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
                             <div class="col-md-8">
                                 @if(isset($price_hoadon))
@@ -132,18 +132,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-4"><b>Khách Đưa</b></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control customer-pay" value="0" placeholder="Nhập số điền khách đưa">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-4"><b>Tiền thừa</b></label>
-                            <div class="col-md-8 excess-cash">
-                                
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

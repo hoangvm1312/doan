@@ -107,11 +107,7 @@
                 </div>
                 <div class="row bill-action">
                     <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12 p-1">
-                                <textarea class="form-control" id="note-order" placeholder="Nhập ghi chú hóa đơn" rows="3"></textarea>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadon))
@@ -130,25 +126,16 @@
                     </div>
 
 
-                    <div class="col-md-6">
-                        <div class="row form-group">
+                    <div class="col-md-6" >
+                        <div class="row form-group" style='padding-top:10px'>
                             <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
                             <div class="col-md-8">
-                                <input type="text" value="0" class="form-control total-pay" disabled="disabled">
+                                @if(isset($price_hoadon))
+                                <input type="text" value="{{$price_hoadon}} VNĐ" class="form-control total-pay" disabled="disabled">
+                                @endif
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-4"><b>Khách Đưa</b></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control customer-pay" value="0" placeholder="Nhập số điền khách đưa">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-4"><b>Tiền thừa</b></label>
-                            <div class="col-md-8 excess-cash">
-                                
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
