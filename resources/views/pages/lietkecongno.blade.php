@@ -1,5 +1,6 @@
 @extends('welcome')
 @section('content')
+
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -13,11 +14,11 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  	@$i=1;
+	  	<!-- Công nợ cafe -->
 	  	@if(isset($khachhang_cafe))
 		  	@foreach($khachhang_cafe as $key=>$value)
 			    <tr>
-			      <th scope="row">{{$i}}</th>
+			      <th scope="row">1</th>
 			      <td>{{$value->khachhang_name}}</td>
 			      <td>Cafe</td>
 			      <td>{{$value->khachhang_sdt}}</td>
@@ -25,7 +26,22 @@
 			      <td>{{$value->hoadoncafe_price}}</td>
 			      <td><a class="button-seleted" href="#"><button>Chi tiết</button></a></td>
 			    </tr>
-		    @foreach
+		    @endforeach
+	    @endif
+
+	    <!-- Công nợ karaoke -->
+	    @if(isset($khachhang_karaoke))
+		  	@foreach($khachhang_karaoke as $key=>$value)
+			    <tr>
+			      <th scope="row">1</th>
+			      <td>{{$value->khachhang_name}}</td>
+			      <td>Karaoke</td>
+			      <td>{{$value->khachhang_sdt}}</td>
+			      <td>{{$value->hoadonkaraoke_timein}}</td>
+			      <td>{{$value->hoadonkaraoke_price}}</td>
+			      <td><a class="button-seleted" href="#"><button>Chi tiết</button></a></td>
+			    </tr>
+		    @endforeach
 	    @endif
 	  </tbody>
 	</table>

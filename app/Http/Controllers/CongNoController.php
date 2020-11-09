@@ -45,21 +45,33 @@ class CongNoController extends Controller
     }
 
     public function lietKeCongNo(Request $request){
-        $khachhang_cafe=DB::table('tbl_khachhang')
-        ->where('tbl_khachhang.khachhang_sdt',$request->numb)
-        ->join('tbl_congnocafe','tbl_congnocafe.khachhang_sdt','=','tbl_khachhang.khachhang_sdt')
-        ->where('tbl_congnocafe.congnocafe_status','1')
-        ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_congnocafe.hoadoncafe_id')
-        ->get();
-
-        $khachhang_karaoke=DB::table('tbl_khachhang')
-        ->where('tbl_khachhang.khachhang_sdt',$request->numb)
-        ->join('tbl_congnokaraoke','tbl_congnokaraoke.khachhang_sdt','=','tbl_khachhang.khachhang_sdt')
-        ->where('tbl_congnokaraoke.congnokaraoke_status','1')
-        ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_congnokaraoke.hoadonkaraoke_id')
-        ->get();
         
-        return view('pages.lietkecongno')->with('khachhang_cafe',$khachhang_cafe)->with('khachhang_karaoke',$khachhang_karaoke);
+
+        $khachhang=DB::table('tbl_khachhang')
+        ->where('tbl_khachhang.khachhang_sdt',$request->numb)
+        ->get();
+        $dskhachhangcafe=array();
+
+        foreach($khachhang as $key=>$value){
+            $tam1=DB::table('tbl_khachhang') 
+            ->where('tbl_khachhang.khachhang_id',$value->khachhang_id)
+            ->join('tbl_congnocafe','tbl_congnocafe.khachhang_id','=','tbl_khachhang.khachhang_id')
+            ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_congnocafe.hoadoncafe_id')
+            ->first();
+            array_push($dskhachhangcafe, $tam1);
+        }
+
+        $dskhachhangkaraoke=array();
+        foreach($khachhang as $key=>$value){
+            $tam2=DB::table('tbl_khachhang') 
+            ->where('tbl_khachhang.khachhang_id',$value->khachhang_id)
+            ->join('tbl_congnokaraoke','tbl_congnokaraoke.khachhang_id','=','tbl_khachhang.khachhang_id')
+            ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_congnokaraoke.hoadonkaraoke_id')
+            ->first();
+            array_push($dskhachhangkaraoke, $tam2);
+        }
+
+        return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe)->with('khachhang_karaoke',$dskhachhangkaraoke);
         
     }
 }
