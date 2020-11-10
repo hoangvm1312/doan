@@ -35,8 +35,8 @@ Route::get('/choose-product/{sanpham_id}/{ban_id}', 'BillController@chooseProduc
 Route::get('/thanh-toan-cafe/{hoadoncafe_id}', 'OrderController@print_bill_cafe');
 
 //Công nợ
-Route::get('/cong-no-cafe/{hoadoncafe_id}', 'CongNoController@thongTinKhachHang');
-Route::post('/save-thong-tin-khach/{hoadoncafe_id}', 'CongNoController@saveCongNo');
+Route::get('/cong-no-cafe/{hoadoncafe_id}', 'CongNoController@thongTinKhachHangCafe');
+Route::post('/save-thong-tin-khach/{hoadoncafe_id}', 'CongNoController@saveCongNoCafe');
 
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
