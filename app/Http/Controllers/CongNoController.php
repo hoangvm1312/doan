@@ -57,6 +57,9 @@ class CongNoController extends Controller
         $data_cn['congnokaraoke_time']=$time;
         $data_cn['khachhang_id']=$khachhang->khachhang_id;
         DB::table('tbl_congnokaraoke')->insert($data_cn);
+
+        //Đang gặp lỗi do chưa cập nhật tình trạng hóa đơn karaoke và chuyển giá phòng sang để in hóa đơn
+
         return Redirect::to('/thanh-toan-karaoke/'.$hoadonkaraoke_id);
     }
 
@@ -90,8 +93,20 @@ class CongNoController extends Controller
             ->join('tbl_congnokaraoke','tbl_congnokaraoke.khachhang_id','=','tbl_khachhang.khachhang_id')
             ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_congnokaraoke.hoadonkaraoke_id')
             ->first();
-            array_push($dskhachhangkaraoke, $tam2);
+            if(!is_null($tam2)) array_push($dskhachhangkaraoke, $tam2);
         }
+
+            
+
+
+        /*if(count($dskhachhangcafe)!=0&&count($dskhachhangkaraoke)==0)  
+            return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe);
+
+        else if(count($dskhachhangkaraoke)!=0&&count($dskhachhangcafe)==0) 
+            return view('pages.lietkecongno')->with('khachhang_karaoke',$dskhachhangkaraoke);
+        else
+            return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe)->with('khachhang_karaoke',$dskhachhangkaraoke);*/
+
 
         if(isset($dskhachhangcafe)&&is_null($dskhachhangkaraoke))  
             return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe);

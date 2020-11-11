@@ -17,7 +17,7 @@
 		@elseif(isset($hoadonkaraoke_id))
 			<form name="hdkaraoke" style="padding: 50px; margin-left: 500px" action="{{URL::to('/save-thong-tin-khach/'.$hoadonkaraoke_id)}}" method="post">
 			@csrf
-		  <label for="fname">Tên khách hàng:</label>
+		  <label for="fname">Tên khách hàng karaoke:</label>
 		  <input type="text" name="name"><br><br>
 		  <label for="lname">Số điện thoại:</label>
 		  <input type="text"name="numb"><br><br>

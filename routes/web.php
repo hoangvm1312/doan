@@ -34,9 +34,11 @@ Route::get('/choose-product/{sanpham_id}/{ban_id}', 'BillController@chooseProduc
 //print cafe
 Route::get('/thanh-toan-cafe/{hoadoncafe_id}', 'OrderController@print_bill_cafe');
 
-//Công nợ
+//Công nợ cafe
 Route::get('/cong-no-cafe/{hoadoncafe_id}', 'CongNoController@thongTinKhachHangCafe');
 Route::post('/save-thong-tin-khach/{hoadoncafe_id}', 'CongNoController@saveCongNoCafe');
+
+
 
 //karaoke
 Route::get('/loai-phong', 'KaraokeController@showLoaiPhong');
@@ -52,11 +54,13 @@ Route::get('/minus-karaoke/{sanpham_id}/{hoadonkaraoke_id}', 'BillKaraokeControl
 Route::get('/delete-karaoke/{sanpham_id}/{hoadonkaraoke_id}', 'BillKaraokeController@deleteProduct');
 Route::get('/choose-product-karaoke/{sanpham_id}/{ban_id}', 'BillKaraokeController@chooseProduct');
 
-//print cafe
+//print karaoke
 Route::get('/check-out-karaoke/{hoadonkaraoke_id}/{phong_id}', 'BillKaraokeController@checkout');
 Route::get('/thanh-toan-karaoke/{hoadonkaraoke_id}/{loaiphong_price}', 'OrderController@print_bill_karaoke');
 
-
+//Công nợ karaoke
+Route::get('/cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@thongTinKhachHangkaraoke');
+Route::post('/save-thong-tin-khach/{hoadonkaraoke_id}', 'CongNoController@saveCongNokaraoke');
 
 //THANH TOÁN CÔNG NỢ
 Route::get('/thanh-toan-cong-no', 'CongNoController@timThongTin');

@@ -32,6 +32,7 @@ class BillKaraokeController extends Controller
         ->where('phong_id',$phong_id)
         ->first();
 
+
         $phong_price=DB::table('tbl_phong')
         ->join('tbl_loaiphong','tbl_loaiphong.loaiphong_id','=','tbl_phong.loaiphong_id')
         ->where('phong_id',$phong_id)
@@ -43,7 +44,7 @@ class BillKaraokeController extends Controller
             $price_hoadon=$price_hoadon+$value->hoadonkaraokeDetail_price;
         }
     	
-        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price);
+        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price)->with('hoadonkaraoke_id',$hoadon->hoadonkaraoke_id);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){
@@ -117,7 +118,6 @@ class BillKaraokeController extends Controller
                 $hoadon['hoadonkaraoke_nguoi']='nhan vien';
                 $hoadon['hoadonkaraoke_price']=0;
                 $hoadon['hoadonkaraoke_status']=1;
-                $hoadon['khachhang_id']=1;
                 DB::table('tbl_hoadonkaraoke')->insert($hoadon);
 
                 $hoadon_complete=DB::table('tbl_hoadonkaraoke')->orderby('hoadonkaraoke_id','desc')->first(); // Lấy hóa đơn vừa tạo

@@ -120,7 +120,14 @@
                                 </a>
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
-                                <a href="" class='button-select'><button type="button" class="btn-pay"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ</button></a>
+                                @if(isset($hoadonkaraoke_id))
+                                    <a href="{{URL::to('/cong-no-karaoke/'.$hoadonkaraoke_id)}}" class='button-select' target="_blank">
+                                @else
+                                    <a href="#" class='button-select'>
+                                @endif
+                                    <button type="button" class="btn-pay"  ><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu công nợ
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
