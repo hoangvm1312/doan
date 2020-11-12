@@ -44,7 +44,8 @@ class BillKaraokeController extends Controller
             $price_hoadon=$price_hoadon+$value->hoadonkaraokeDetail_price;
         }
     	
-        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price)->with('hoadonkaraoke_id',$hoadon->hoadonkaraoke_id);
+        return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)
+             ->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){
@@ -193,7 +194,7 @@ class BillKaraokeController extends Controller
         //Tính thời gian khách sử dụng phòng
         $timeUse=$timenow->diffInMinutes($hoadonkaraoke->hoadonkaraoke_timein)/60;
         number_format((float)$timeUse, 1, '.', '');
-        echo($timeUse);
+        if($timeUse<1) $timeUse=1;
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_time'=>$timeUse]);
         //lấy giá loại phòng
         $loaiphong_price= DB::table('tbl_phong')

@@ -62,7 +62,7 @@ class OrderController extends Controller
     	
     	<h4><center>Mã hóa đơn: '.$hoadon->hoadoncafe_id.'</center></h4>
     	<h4><center>Thời gian: '.$hoadon->hoadoncafe_time.'</center></h4>
-    	<table class="table-styling">
+    	<center><table class="table-styling">
     		<thead>
     			<tr >
     				<th>Sản phẩm</th>
@@ -92,7 +92,7 @@ class OrderController extends Controller
     			</tr>';
     		$output.='
     		</tbody>
-    	</table>';
+    	</table></center>';
 
     	DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->update(['hoadoncafe_status'=>0]);
     	DB::table('tbl_bancafe')
@@ -107,6 +107,7 @@ class OrderController extends Controller
     public function print_bill_karaoke($hoadonkaraoke_id,$loaiphong_price){//mã hóa đơn
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($this->print_order_convert_karaoke($hoadonkaraoke_id,$loaiphong_price));
+        $pdf->setPaper('A5');
         return $pdf->stream();
     }
     public function print_order_convert_karaoke($hoadonkaraoke_id,$loaiphong_price){
@@ -133,7 +134,6 @@ class OrderController extends Controller
         }
         .table-styling, th, td {
             border: 1px solid black;
-
         }
         </style>
         <h4><center>Công ty TNHH Tín Thành Việt Mỹ</center></h4>
@@ -157,7 +157,7 @@ class OrderController extends Controller
 
                 <tr>    
                     <td>'.$value->sanpham_name.'</td>
-                    <td><center>'.$value->hoadonkaraokeDetail_nums.'</center></td>
+                    <td>'.$value->hoadonkaraokeDetail_nums.'</td>
                     <td>'.$value->sanpham_price.' VNĐ</td>
                     <td>'.$value->hoadonkaraokeDetail_nums*$value->sanpham_price.' VNĐ</td>
                 </tr>';

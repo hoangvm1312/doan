@@ -120,8 +120,8 @@
                                 </a>
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
-                                @if(isset($hoadonkaraoke_id))
-                                    <a href="{{URL::to('/cong-no-karaoke/'.$hoadonkaraoke_id)}}" class='button-select' target="_blank">
+                                @if(isset($hoadon))
+                                    <a href="{{URL::to('/cong-no-karaoke/'.$hoadon->hoadonkaraoke_id)}}" class='button-select' target="_blank">
                                 @else
                                     <a href="#" class='button-select'>
                                 @endif

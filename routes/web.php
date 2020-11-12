@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Front end
+// FORDEND
 Route::get('/', 'CafeController@showKhuvuc') ;
 
 //cafe
@@ -60,7 +60,7 @@ Route::get('/thanh-toan-karaoke/{hoadonkaraoke_id}/{loaiphong_price}', 'OrderCon
 
 //Công nợ karaoke
 Route::get('/cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@thongTinKhachHangkaraoke');
-Route::post('/save-thong-tin-khach/{hoadonkaraoke_id}', 'CongNoController@saveCongNokaraoke');
+Route::post('/save-thong-tin-khach-karaoke/{hoadonkaraoke_id}', 'CongNoController@saveCongNokaraoke');
 
 //THANH TOÁN CÔNG NỢ
 Route::get('/thanh-toan-cong-no', 'CongNoController@timThongTin');
@@ -69,7 +69,11 @@ Route::post('/danh-sach-cong-no', 'CongNoController@lietKeCongNo');
 
 
 
-//backend
+
+
+
+
+//BACKEND
 Route::get('/admin', 'AdminController@index');
 Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::get('/logout', 'AdminController@logout');

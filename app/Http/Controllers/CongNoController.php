@@ -43,9 +43,10 @@ class CongNoController extends Controller
     }
 
     public function saveCongNokaraoke(Request $request,$hoadonkaraoke_id){
+        //đang không lấy được tên +sđt từ formKhachHang sang
         $data=array();
-        $data['khachhang_name']=$request->name;
-        $data['khachhang_sdt']=$request->numb;
+        $data['khachhang_name']=$request->namek;
+        $data['khachhang_sdt']=$request->numbk;
         DB::table('tbl_khachhang')->insert($data);
 
         $time=Carbon::now('Asia/Ho_Chi_Minh');
@@ -58,9 +59,14 @@ class CongNoController extends Controller
         $data_cn['khachhang_id']=$khachhang->khachhang_id;
         DB::table('tbl_congnokaraoke')->insert($data_cn);
 
-        //Đang gặp lỗi do chưa cập nhật tình trạng hóa đơn karaoke và chuyển giá phòng sang để in hóa đơn
+        $loaiphong_id=DB::table('tbl_hoadonkaraoke')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
+        ->join('tbl_phong','tbl_phong.phong_id','=','tbl_hoadonkaraoke.phong_id')
+        ->join('tbl_loaiphong','tbl_loaiphong.loaiphong_id','=','tbl_phong.loaiphong_id')
+        ->pluck('tbl_loaiphong.loaiphong_id')->first();
 
-        return Redirect::to('/thanh-toan-karaoke/'.$hoadonkaraoke_id);
+
+        return Redirect::to('/check-out-karaoke/'.$hoadonkaraoke_id.'/'.$loaiphong_id);
     }
 
    /* Trả công nợ*/
@@ -95,17 +101,6 @@ class CongNoController extends Controller
             ->first();
             if(!is_null($tam2)) array_push($dskhachhangkaraoke, $tam2);
         }
-
-            
-
-
-        /*if(count($dskhachhangcafe)!=0&&count($dskhachhangkaraoke)==0)  
-            return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe);
-
-        else if(count($dskhachhangkaraoke)!=0&&count($dskhachhangcafe)==0) 
-            return view('pages.lietkecongno')->with('khachhang_karaoke',$dskhachhangkaraoke);
-        else
-            return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe)->with('khachhang_karaoke',$dskhachhangkaraoke);*/
 
 
         if(isset($dskhachhangcafe)&&is_null($dskhachhangkaraoke))  
