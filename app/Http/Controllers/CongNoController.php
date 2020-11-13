@@ -86,9 +86,10 @@ class CongNoController extends Controller
             $tam1=DB::table('tbl_khachhang') 
             ->where('tbl_khachhang.khachhang_id',$value->khachhang_id)
             ->join('tbl_congnocafe','tbl_congnocafe.khachhang_id','=','tbl_khachhang.khachhang_id')
+            ->where('tbl_congnocafe.congnocafe_status',1)
             ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_congnocafe.hoadoncafe_id')
             ->first();
-            array_push($dskhachhangcafe, $tam1);
+            if(!is_null($tam1)) array_push($dskhachhangcafe, $tam1);
         }
 
 
@@ -97,6 +98,7 @@ class CongNoController extends Controller
             $tam2=DB::table('tbl_khachhang') 
             ->where('tbl_khachhang.khachhang_id',$value->khachhang_id)
             ->join('tbl_congnokaraoke','tbl_congnokaraoke.khachhang_id','=','tbl_khachhang.khachhang_id')
+            ->where('tbl_congnokaraoke.congnokaraoke_status',1)
             ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_congnokaraoke.hoadonkaraoke_id')
             ->first();
             if(!is_null($tam2)) array_push($dskhachhangkaraoke, $tam2);
@@ -112,5 +114,53 @@ class CongNoController extends Controller
             return view('pages.lietkecongno')->with('khachhang_cafe',$dskhachhangcafe)->with('khachhang_karaoke',$dskhachhangkaraoke);
         
         
+    }
+
+    public function chiTietCongNoCafe($hoadoncafe_id){
+
+        $hoadoncafe=DB::table('tbl_hoadoncafeDetail')
+        ->join('tbl_hoadoncafe','tbl_hoadoncafe.hoadoncafe_id','=','tbl_hoadoncafeDetail.hoadoncafe_id')
+        ->where('tbl_hoadoncafe.hoadoncafe_id',$hoadoncafe_id)
+        ->join('tbl_sanpham','tbl_sanpham.sanpham_id','=','tbl_hoadoncafeDetail.sanpham_id')
+        ->get();
+        return view('pages.lietKeCongNo')->with('hoadoncafe',$hoadoncafe)->with('hoadoncafe_id',$hoadoncafe_id);
+    }
+
+    public function chiTietCongNoKaraoke($hoadonkaraoke_id){
+         $hoadonkaraoke=DB::table('tbl_hoadonkaraokeDetail')
+        ->join('tbl_hoadonkaraoke','tbl_hoadonkaraoke.hoadonkaraoke_id','=','tbl_hoadonkaraokeDetail.hoadonkaraoke_id')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
+        ->join('tbl_sanpham','tbl_sanpham.sanpham_id','=','tbl_hoadonkaraokeDetail.sanpham_id')
+        ->get();
+
+        $phongdetail=DB::table('tbl_hoadonkaraoke')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
+        ->join('tbl_phong','tbl_phong.phong_id','=','tbl_hoadonkaraoke.phong_id')
+        ->join('tbl_loaiphong','tbl_phong.loaiphong_id','=','tbl_loaiphong.loaiphong_id')
+        ->first();
+        return view('pages.lietKeCongNo')->with('hoadonkaraoke',$hoadonkaraoke)->with('phongdetail',$phongdetail)->with('hoadonkaraoke_id',$hoadonkaraoke_id);
+    }
+
+    public function thanhToanCongNoCafe($hoadoncafe_id){
+        DB::table('tbl_hoadoncafe')
+        ->where('tbl_hoadoncafe.hoadoncafe_id',$hoadoncafe_id)
+        ->join('tbl_congnocafe','tbl_congnocafe.hoadoncafe_id','=','tbl_hoadoncafe.hoadoncafe_id')
+        ->update(['tbl_congnocafe.congnocafe_status'=>0])  ;
+        return Redirect::to('/thanh-toan-cafe/'.$hoadoncafe_id);
+    }
+
+    public function thanhToanCongNoKaraoke($hoadonkaraoke_id){
+         DB::table('tbl_hoadonkaraoke')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
+        ->join('tbl_congnokaraoke','tbl_congnokaraoke.hoadonkaraoke_id','=','tbl_hoadonkaraoke.hoadonkaraoke_id')
+        ->update(['tbl_congnokaraoke.congnokaraoke_status'=>0]);
+
+        $loaiphong_price=DB::table('tbl_hoadonkaraoke')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
+        ->join('tbl_phong','tbl_phong.phong_id','=','tbl_hoadonkaraoke.phong_id')
+        ->join('tbl_loaiphong','tbl_phong.loaiphong_id','=','tbl_loaiphong.loaiphong_id')
+        ->pluck('tbl_loaiphong.loaiphong_price')->first();
+
+        return Redirect::to('/thanh-toan-karaoke/'.$hoadonkaraoke_id.'/'.$loaiphong_price);
     }
 }

@@ -22,7 +22,7 @@
                         <li><a  href="{{URL::to('/menu')}}" >Thực đơn</a></li>
                     </ul>
                 </div>
-                <a class='button-selected' href="{{URL::to('/thanh-toan-cong-no')}}"><button style="margin-left: 900px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
+                <a class='button-selected' href="{{URL::to('/tim-thong-tin-cong-no')}}"><button style="margin-left: 900px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
             </div>
         </div>
     </div>

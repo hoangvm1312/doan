@@ -62,7 +62,7 @@ class OrderController extends Controller
     	
     	<h4><center>Mã hóa đơn: '.$hoadon->hoadoncafe_id.'</center></h4>
     	<h4><center>Thời gian: '.$hoadon->hoadoncafe_time.'</center></h4>
-    	<center><table class="table-styling">
+    	<table class="table-styling">
     		<thead>
     			<tr >
     				<th>Sản phẩm</th>
@@ -83,7 +83,7 @@ class OrderController extends Controller
     			</tr>';
     		}
     		$output.='
-    		<tr>	
+    		    <tr>	
     				<td><strong>Tổng cộng: </strong></td>
     				<td></td>
     				<td></td>
@@ -92,7 +92,9 @@ class OrderController extends Controller
     			</tr>';
     		$output.='
     		</tbody>
-    	</table></center>';
+    	</table>
+        <br><br>
+        <h4><center>Cảm ơn quý khách</center></h4>';
 
     	DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->update(['hoadoncafe_status'=>0]);
     	DB::table('tbl_bancafe')
@@ -164,10 +166,10 @@ class OrderController extends Controller
             }
             $output.='
                 <tr>
-                    <td>'.$tenphong.'</td>
+                    <td>Phòng '.$tenphong.'</td>
                     <td>'.$hoadon->hoadonkaraoke_time.' giờ</td>
                     <td>'.$loaiphong_price.' VNĐ</td>
-                    <td>'.$loaiphong_price*$hoadon->hoadonkaraoke_time.'</td>
+                    <td>'.$loaiphong_price*$hoadon->hoadonkaraoke_time.' VNĐ</td>
                 </tr>';
             $output.='
                 <tr>    
@@ -178,7 +180,9 @@ class OrderController extends Controller
                 </tr>';
             $output.='
             </tbody>
-        </table>';
+        </table>
+        <br><br>
+        <h4><center>Cảm ơn quý khách</center></h4>';
 
         //Cập nhật trạng thái hóa đơn
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_status'=>0]);

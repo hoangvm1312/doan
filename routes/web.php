@@ -63,8 +63,13 @@ Route::get('/cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@thongTinKhac
 Route::post('/save-thong-tin-khach-karaoke/{hoadonkaraoke_id}', 'CongNoController@saveCongNokaraoke');
 
 //THANH TOÁN CÔNG NỢ
-Route::get('/thanh-toan-cong-no', 'CongNoController@timThongTin');
+Route::get('/tim-thong-tin-cong-no', 'CongNoController@timThongTin');
 Route::post('/danh-sach-cong-no', 'CongNoController@lietKeCongNo');
+
+Route::get('/chi-tiet-cong-no-cafe/{hoadoncafe_id}', 'CongNoController@chiTietCongNoCafe');
+Route::get('/chi-tiet-cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@chiTietCongNoKaraoke');
+Route::get('/thanh-toan-cong-no-cafe/{hoadoncafe_id}', 'CongNoController@thanhToanCongNoCafe');
+Route::get('/thanh-toan-cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@thanhToanCongNoKaraoke');
 
 
 

@@ -193,7 +193,8 @@ class BillKaraokeController extends Controller
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_timeout'=>$timenow]);
         //Tính thời gian khách sử dụng phòng
         $timeUse=$timenow->diffInMinutes($hoadonkaraoke->hoadonkaraoke_timein)/60;
-        number_format((float)$timeUse, 1, '.', '');
+        
+        $timeUse=number_format((float)$timeUse, 1, '.', '');
         if($timeUse<1) $timeUse=1;
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_time'=>$timeUse]);
         //lấy giá loại phòng
