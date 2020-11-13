@@ -124,7 +124,7 @@
 	
 	
 	@elseif(isset($hoadonkaraoke) )
-	<a class='button-seleted' href="{{URL::to('/thanh-toan-cong-no-karaoke/'.$hoadonkaraoke_id)}}"  target="_blank"><button style="margin-left: 1300px" type="button" class="btn btn-success">Thành toán</button></a>
+	<a class='button-seleted' href="{{URL::to('/thanh-toan-cong-no-karaoke/'.$hoadonkaraoke_id)}}"  target="_blank"><button style="margin-left: 1300px" type="button" class="btn btn-success">Thanh toán</button></a>
 	@endif
 	<a class='button-seleted' href='{{URL::to("/")}}' ><button style="margin-left: 10px" type="button" class="btn btn-danger">Cancel</button></a>
 	@endif
