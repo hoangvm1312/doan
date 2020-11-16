@@ -22,6 +22,8 @@
                                     <th scope="col">Giá</th>
                                 </tr>
                                 </thead>
+
+                                
                                 <tbody>
                                         <th scope="col">
                                             <select name="nguyenlieu_name[]" class="form-control input-sm m-bot15">
@@ -47,7 +49,7 @@
                             <div id="newRow"></div>
                 </div>
                 <button type="submit"  name="add_phieunhap" class="btn btn-info">Thêm phiếu</button>
-                </form>
+</form>
             </section>
         </div>
     </div>

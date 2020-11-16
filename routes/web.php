@@ -71,7 +71,10 @@ Route::get('/chi-tiet-cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@chi
 Route::get('/thanh-toan-cong-no-cafe/{hoadoncafe_id}', 'CongNoController@thanhToanCongNoCafe');
 Route::get('/thanh-toan-cong-no-karaoke/{hoadonkaraoke_id}', 'CongNoController@thanhToanCongNoKaraoke');
 
-
+//Phiếu đền bù
+Route::get('/nhap-thiet-bi', 'PhieuDenBuController@nhapThietBi');
+Route::post('/save-phieu-den-bu', 'PhieuDenBuController@savePhieu');
+Route::get('/in-phieu-den-bu/{id}', 'PhieuDenBuController@print_phieudenbu');
 
 
 
