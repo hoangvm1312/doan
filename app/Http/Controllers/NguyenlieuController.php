@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 session_start();
+
 class NguyenlieuController extends Controller
 {
     public function AuthLogin()

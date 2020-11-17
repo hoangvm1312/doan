@@ -40,8 +40,9 @@ class PhieunhapDetailController extends Controller
         if(count($request->nguyenlieu_name) > 0)
         {
         foreach($request->nguyenlieu_name as $item=>$v){
-            $price+= $request->phieunhapDetail_cost[$item]*$request->phieunhapDetail_nums[$item];                                                }
+            $price+= $request->phieunhapDetail_cost[$item]*$request->phieunhapDetail_nums[$item];
         }
+    }
         
         $data['phieunhap_price'] =$price;
         $id = DB::table('tbl_phieunhap')->insertGetId($data);

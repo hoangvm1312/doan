@@ -3,16 +3,16 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Liệt kê bàn cà phê
+                Liệt kê phòng hát
             </div>
             <div class="table-responsive">
-                <?php
-                $message = Session::get('message');
-                if($message){
-                    echo'<span class="text-alert">'.$message.'</span>';
-                    Session::put('$message',null);
-                }
-                ?>
+            <?php
+            $message = Session::get('message');
+            if($message){
+            echo '<span class="text-alert">'.$message.'</span>';
+            Session::put('message',null);
+            }
+            ?>
                 <table class="table table-striped b-t b-light" id="myTable">
                     <thead>
                     <tr>

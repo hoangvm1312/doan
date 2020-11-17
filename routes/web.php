@@ -12,8 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// FORDEND
+// FORTEND
 Route::get('/', 'CafeController@showKhuvuc') ;
+
+Route::get('/login', 'HomeController@index_login');
+Route::get('/logout_frontend', 'HomeController@logout');
+Route::post('/frontend_dashboard', 'HomeController@dashboard');
+
 
 //cafe
 Route::get('/khu-vuc', 'CafeController@showKhuvuc');
@@ -82,11 +87,15 @@ Route::get('/in-phieu-den-bu/{id}', 'PhieuDenBuController@print_phieudenbu');
 
 
 //BACKEND
+
+//backend
 Route::get('/admin', 'AdminController@index');
 Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::get('/logout', 'AdminController@logout');
-Route::get('/profile', 'AdminController@profile');
+Route::post('/filter-by-date', 'AdminController@filter_by_date');
 Route::post('/admin_dashboard', 'AdminController@dashboard');
+Route::post('/dashboard-filter', 'AdminController@dashboard_filter');
+Route::post('/day-order', 'AdminController@day_order');
 
 
 //category
@@ -227,6 +236,16 @@ Route::get('/add_phieunhap', 'PhieunhapDetailController@add_phieunhap');
 Route::post('/save_phieunhap', 'PhieunhapDetailController@save_phieunhap');
 Route::get('/print_phieunhap/{phieunhap_id}', 'PhieunhapDetailController@print_phieunhap');
 Route::get('/show_phieunhapdetail/{phieunhap_id}', 'PhieunhapDetailController@show_phieunhapdetail');
+
+//phieu xuat
+Route::get('/add_phieuxuat', 'PhieuXuatController@add_phieuxuat');
+Route::get('/thongke_phieuxuat', 'PhieuXuatController@thongke_phieuxuat');
+//phieuxuatdetail
+Route::get('/add_phieuxuat', 'PhieuXuatDetailController@add_phieuxuat');
+Route::post('/save_phieuxuat', 'PhieuXuatDetailController@save_phieuxuat');
+Route::get('/print_phieuxuat/{phieuxuat_id}', 'PhieuXuatDetailController@print_phieuxuat');
+Route::get('/show_phieuxuatdetail/{phieuxuat_id}', 'PhieuXuatDetailController@show_phieuxuatdetail');
+
 //phieu huy
 Route::get('/add_phieuhuy', 'PhieuHuyController@add_phieuhuy');
 Route::get('/thongke_phieuhuy', 'PhieuHuyController@thongke_phieuhuy');

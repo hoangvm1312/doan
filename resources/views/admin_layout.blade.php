@@ -27,9 +27,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- //calendar -->
     <!-- //font-awesome icons -->
     <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
-    <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{asset('public/backend/js/morris.js')}}"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 </head>
 <body>
 <section id="container">
@@ -383,17 +385,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li class="sub-menu">
                         <a href="{{URL::to('/thongke_phieuthue')}}">
                             <i class="fa fa-file"></i>
-                            <span>Phiếu thuê</span>
+                            <span>Hóa đơn Karaoke</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-file"></i>
-                            <span>Phiếu nhập hàng hóa</span>
+                            <span>Lập phiếu hàng hóa</span>
                         </a>
                         <ul class="sub">
                             <li><a href="{{URL::to('/add_phieunhap')}}">Lập phiếu</a></li>
                             <li><a href="{{URL::to('/thongke_phieunhap')}}">Thống kê</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-file"></i>
+                            <span>Phiếu xuất hàng hóa</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/add_phieuxuat')}}">Lập phiếu</a></li>
+                            <li><a href="{{URL::to('/thongke_phieuxuat')}}">Thống kê</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -433,10 +445,115 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="{{asset('public/backend/js/scripts.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript">
     $(document).ready( function () {
         $('#myTable').DataTable();
     } );
+</script>
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            monthNames:["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],
+            duration:"slow"
+        });
+        $( "#datepicker2" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            monthNames:["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],
+            duration:"slow"
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+                chart30day();
+
+            var chart = new Morris.Bar({
+            element: 'chart',
+            barColors:['#f56c42','#000000','#000000'],
+            parseTime: false,
+            xkey: 'ngay',
+            ykeys: ['doanhso','loinhuan','tongdon'],
+            labels:['Doanh thu','Lợi nhuận','Tổng đơn'],
+            hideOver:'auto'
+            });
+
+    function chart30day(){
+        var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/day-order')}}",
+            method:"POST",
+            dataType:"JSON",
+            data:{_token:_token},
+                success:function (data)
+                {
+                    chart.setData(data);
+                }
+            });
+    }
+
+    $('.dashboard-filter').change(function(){
+            var dashboard_value = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/dashboard-filter')}}",
+            method:"POST",
+            dataType:"JSON",
+            data:{dashboard_value:dashboard_value,_token:_token},
+                success:function (data)
+                {
+                    chart.setData(data);
+                }
+            });
+    });
+
+    $('#btn-dashboard-filter').click(function (){
+        var _token = $('input[name="_token"]').val();
+        var from_date = $('#datepicker').val();
+        var to_date = $('#datepicker2').val();
+        $.ajax({
+            url:"{{url('/filter-by-date')}}",
+            method:"POST",
+            dataType:"JSON",
+            data:{from_date:from_date,to_date:to_date,_token:_token},
+            success:function (data)
+            {
+                chart.setData(data);
+            }
+        })
+    });
+});
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var donut = Morris.Donut({
+            element:'donut',
+            resize: true,
+            colors:[
+                '#4287f5',
+                '#f5429e',
+                '#42f548',
+                '#42eff5',
+                '#ecf542'
+            ],
+            data: [
+            {label: "Phòng hát", value: <?php echo $phong ?>},
+            {label: "Khu vực", value: <?php echo $khuvuc ?>},
+            {label: "Bàn cà phê", value: <?php echo $ban ?>},
+            {label: "Sản phẩm", value: <?php echo $sanpham ?>},
+            {label: "Nguyên liệu", value: <?php echo $nguyenlieu?>}
+                    ]
+        });           
+});
 </script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{asset('public/backend/js/flot-chart/excanvas.min.js')}}"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>

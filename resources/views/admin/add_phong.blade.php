@@ -30,13 +30,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassord1">Trạng thái</label>
-                                <select name="phong_status" class="form-control input-sm m-bot15">
-                                    <option value="0">Trống</option>
-                                    <option value="1">Đã sử dụng</option>
-                                </select>
-                            </div>
                             <button type="submit" name ="add_phong" class="btn btn-info">Thêm phòng</button>
                         </form>
                     </div>

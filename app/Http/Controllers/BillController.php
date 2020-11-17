@@ -14,7 +14,18 @@ session_start();
 
 class BillController extends Controller
 {
+    public function AuthLogin_frontend() //done
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('/');
+        }else{
+            return Redirect::to('login')->send();
+        }
+    }
+
     public function showBill($bancafe_id,$loaisanpham_id){
+        $this->AuthLogin_frontend();
         $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
         $all_sanpham=DB::table('tbl_sanpham')
         ->where('loaisanpham_id',$loaisanpham_id)
@@ -44,6 +55,7 @@ class BillController extends Controller
     }
 
     public function plusProduct($sanpham_id,$hoadoncafe_id){
+        
     	$hdDetail=DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)->first();
         $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
         $i=$hdDetail->hoadoncafeDetail_nums+1;
@@ -65,6 +77,7 @@ class BillController extends Controller
     }
 
     public function minusProduct($sanpham_id,$hoadoncafe_id){
+
     	$hdDetail=DB::table('tbl_hoadoncafeDetail')->where('sanpham_id',$sanpham_id)->where('hoadoncafe_id',$hoadoncafe_id)->first();
         $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
         $i=$hdDetail->hoadoncafeDetail_nums-1;
@@ -108,20 +121,21 @@ class BillController extends Controller
     }
 
     public function chooseProduct($sanpham_id,$ban_id){
+        $this->AuthLogin_frontend();
         $bill=DB::table('tbl_hoadoncafe')->where('bancafe_id',$ban_id)->where('hoadoncafe_status','1')->orderby('hoadoncafe_id','desc')->first();
         if(is_null($bill)){ //Bàn trống, chưa có hoá đơn
 
                 $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
                 $time=Carbon::now('Asia/Ho_Chi_Minh');
-
+                $name = Session::get('admin_name');
                 //Tạo hóa đơn   
                 $hoadon=array();
                 $hoadon['bancafe_id']=$ban_id;
                 $hoadon['hoadoncafe_time']=$time;
-                $hoadon['hoadoncafe_nguoi']='nhan vien';
+                $hoadon['hoadoncafe_nguoi']=$name;
                 $hoadon['hoadoncafe_price']=0;
                 $hoadon['hoadoncafe_status']=1;
-                $hoadon['khachhang_id']=1;
+           
                 DB::table('tbl_hoadoncafe')->insert($hoadon);
 
                 $hoadon_complete=DB::table('tbl_hoadoncafe')->orderby('hoadoncafe_id','desc')->first(); // Lấy hóa đơn vừa tạo

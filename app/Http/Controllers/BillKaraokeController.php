@@ -14,7 +14,17 @@ session_start();
 
 class BillKaraokeController extends Controller
 {
+    public function AuthLogin_frontend() //done
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('/');
+        }else{
+            return Redirect::to('login')->send();
+        }
+    }
     public function showBill($phong_id,$loaisanpham_id){
+        $this->AuthLogin();
         $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
         $all_sanpham=DB::table('tbl_sanpham')
         ->where('loaisanpham_id',$loaisanpham_id)
@@ -105,18 +115,19 @@ class BillKaraokeController extends Controller
     }
 
     public function chooseProduct($sanpham_id,$ban_id){
+        $this->AuthLogin_frontend();
         $bill=DB::table('tbl_hoadonkaraoke')->where('phong_id',$ban_id)->where('hoadonkaraoke_status','1')->orderby('hoadonkaraoke_id','desc')->first();
         if(is_null($bill)){ //Bàn trống, chưa có hoá đơn
 
                 $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
                 $time=Carbon::now('Asia/Ho_Chi_Minh');
-
+                $name = Session::get('admin_name');
                 //Tạo hóa đơn   
                 $hoadon=array();
                 $hoadon['phong_id']=$ban_id;
                 $hoadon['hoadonkaraoke_timein']=$time;
                 $hoadon['hoadonkaraoke_timeout']=$time;
-                $hoadon['hoadonkaraoke_nguoi']='nhan vien';
+                $hoadon['hoadonkaraoke_nguoi']=$name;
                 $hoadon['hoadonkaraoke_price']=0;
                 $hoadon['hoadonkaraoke_status']=1;
                 DB::table('tbl_hoadonkaraoke')->insert($hoadon);

@@ -19,11 +19,22 @@ class PhieuDenBuController extends Controller
     public function nhapThietBi(){
     	return view('pages.phieudenbu');
     }
+    public function AuthLogin_frontend() //done
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('/');
+        }else{
+            return Redirect::to('login')->send();
+        }
+    }
     public function savePhieu(Request $request){
+        $this->AuthLogin_frontend();
     	$time=Carbon::now('Asia/Ho_Chi_Minh');
         $data = array();
         $data['phieudenbu_time'] = $time;
-        $data['phieudenbu_nguoi'] = 'nhanvien';	
+        $name = Session::get('admin_name');
+        $data['phieudenbu_nguoi'] = $name;	
         $price = 0;
         if(count($request->thietbi_name) > 0)
         {
@@ -58,12 +69,14 @@ class PhieuDenBuController extends Controller
     	else return Redirect::to('/nhap-thiet-bi'); 
     }
     public function print_phieudenbu($id){
+        $this->AuthLogin_frontend();
     	$pdf = \App::make('dompdf.wrapper');
     	$pdf->loadHTML($this->print_order_convert($id));
         $pdf->setPaper('A5');
     	return $pdf->stream();
     }
     public function print_order_convert($id){
+        $this->AuthLogin_frontend();
     	$phieudenbu=DB::table('tbl_phieudenbu')
     	->where('phieudenbu_id',$id)
     	->first();

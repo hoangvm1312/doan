@@ -7,9 +7,10 @@ use DB;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+use App\PhieuXuat;
 session_start();
-
-class PhieuNhapController extends Controller
+class PhieuXuatController extends Controller
 {
     public function AuthLogin()
     {
@@ -20,13 +21,14 @@ class PhieuNhapController extends Controller
             return Redirect::to('admin')->send();
         }
     }
-    public function thongke_phieunhap()
+    public function thongke_phieuxuat()
     {
         $this->AuthLogin();
-        $thongke_phieunhap = DB::table('tbl_phieunhap')
-            ->orderby('tbl_phieunhap.phieunhap_id', 'desc')->get();
-        $manager_phieunhap = view('admin.thongke_phieunhap')->with('thongke_phieunhap', $thongke_phieunhap);
-        return view('Admin_Layout')->with('admin.thongke_phieunhap', $manager_phieunhap);
+        $thongke_phieuxuat = DB::table('tbl_phieuxuat')
+            ->orderby('tbl_phieuxuat.phieuxuat_id', 'desc')->get();
+        $manager_phieuxuat = view('admin.thongke_phieuxuat')->with('thongke_phieuxuat', $thongke_phieuxuat);
+        return view('Admin_Layout')->with('admin.thongke_phieuxuat', $manager_phieuxuat);
     }
     
+
 }

@@ -14,6 +14,15 @@ session_start();
 
 class CongNoController extends Controller
 {
+    public function AuthLogin_frontend() //done
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('/');
+        }else{
+            return Redirect::to('login');
+        }
+    }
     //Công nợ cafe
     public function thongTinKhachHangCafe($hoadoncafe_id){
     	return view('pages.formKhachHang')->with('hoadoncafe_id',$hoadoncafe_id);
@@ -43,6 +52,7 @@ class CongNoController extends Controller
     }
 
     public function saveCongNokaraoke(Request $request,$hoadonkaraoke_id){
+        $this->AuthLogin_frontend();
         //đang không lấy được tên +sđt từ formKhachHang sang
         $data=array();
         $data['khachhang_name']=$request->namek;
@@ -52,8 +62,9 @@ class CongNoController extends Controller
         $time=Carbon::now('Asia/Ho_Chi_Minh');
         $khachhang=DB::table('tbl_khachhang')->orderby('khachhang_id','desc')->first();
         $data_cn=array();
+        $name = Session::get('admin_name');
         $data_cn['hoadonkaraoke_id']=$hoadonkaraoke_id;
-        $data_cn['congnokaraoke_nguoi']='nhanvien';
+        $data_cn['congnokaraoke_nguoi']=$name;
         $data_cn['congnokaraoke_status']=1;
         $data_cn['congnokaraoke_time']=$time;
         $data_cn['khachhang_id']=$khachhang->khachhang_id;

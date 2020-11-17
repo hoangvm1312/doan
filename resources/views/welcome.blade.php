@@ -22,8 +22,9 @@
                         <li><a  href="{{URL::to('/menu')}}" >Thực đơn</a></li>
                     </ul>
                 </div>
-                <a class='button-selected' href="{{URL::to('/tim-thong-tin-cong-no')}}"><button style="margin-left: 750px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
+                <a class='button-selected' href="{{URL::to('/tim-thong-tin-cong-no')}}"><button style="margin-left: 700px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
                 <a class='button-selected' href="{{URL::to('/nhap-thiet-bi')}}"><button style="margin-left: 10px" type="button" class="btn btn-secondary">Lập phiếu đền bù</button></a>
+                <a class='button-selected' href="{{URL::to('/logout_frontend')}}"><button style="margin-left: 10px" type="button" class="btn btn-secondary">Đăng xuất</button></a>
             </div>
         </div>
     </div>

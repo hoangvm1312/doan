@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Redirect;
@@ -41,10 +40,10 @@ class PhongController extends Controller
         $data = array();
         $data['phong_name'] = $request->phong_name;
         $data['loaiphong_id'] = $request->loai_phong;
-        $data['phong_status'] = $request->phong_status;
+        $data['phong_status'] = 0;
         DB::table('tbl_phong')->insert($data);
         Session::put('message','Thêm phòng thành công');
-        return Redirect::to('add_phong');
+        return Redirect::to('all_phong');
     }
     public function unactive_phong($phong_id)
     {
