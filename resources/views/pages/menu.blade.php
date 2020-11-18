@@ -129,7 +129,7 @@
                             <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
                             <div class="col-md-8">
                                 @if(isset($price_hoadon))
-                                <input type="text" value="{{$price_hoadon}}" class="form-control total-pay" disabled="disabled">
+                                <input type="text" value="{{$price_hoadon}} VNĐ" class="form-control total-pay" disabled="disabled">
                                 @endif
                             </div>
                         </div>

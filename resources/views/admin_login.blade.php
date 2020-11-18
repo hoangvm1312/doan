@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- bootstrap-css -->
-    <link rel="stylesheet" href=""{{asset('public/backend/css/bootstrap.min.css')}}/>
+    <link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}"/>
     <!-- //bootstrap-css -->
     <!-- Custom CSS -->
     <link href="{{asset('public/backend/css/style.css')}}" rel='stylesheet' type='text/css' />
@@ -33,11 +33,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <input type="text" class="ggg" name="admin_email" placeholder="Điền thông tin email" required="">
             <input type="password" class="ggg" name="admin_password" placeholder="Mật khẩu" required="">
             <span><input type="checkbox" />Nhớ mật khẩu</span>
-            <h6><a href="#">Quên mật khẩu?</a></h6>
             <div class="clearfix"></div>
             <input type="submit" value="Đăng nhập" name="login">
         </form>
-{{--        <p>Bạn chưa có tài khoản?<a href="registration.html">Tạo ngay một tài khoản mới</a></p>--}}
+
     </div>
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>

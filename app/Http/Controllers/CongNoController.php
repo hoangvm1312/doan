@@ -29,16 +29,18 @@ class CongNoController extends Controller
     }
 
     public function saveCongNoCafe(Request $request,$hoadoncafe_id){
+        $this->AuthLogin_frontend();
     	$data=array();
     	$data['khachhang_name']=$request->name;
     	$data['khachhang_sdt']=$request->numb;
     	DB::table('tbl_khachhang')->insert($data);
+        $name = Session::get('admin_name');
 
     	$time=Carbon::now('Asia/Ho_Chi_Minh');
     	$khachhang=DB::table('tbl_khachhang')->orderby('khachhang_id','desc')->first();
     	$data_cn=array();
     	$data_cn['hoadoncafe_id']=$hoadoncafe_id;
-    	$data_cn['congnocafe_nguoi']='nhanvien';
+    	$data_cn['congnocafe_nguoi']=$name;
     	$data_cn['congnocafe_status']=1;
     	$data_cn['congnocafe_time']=$time;
     	$data_cn['khachhang_id']=$khachhang->khachhang_id;

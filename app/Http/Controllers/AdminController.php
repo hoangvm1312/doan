@@ -46,7 +46,7 @@ class AdminController extends Controller
     {
         $this->AuthLogin();
         $admin_email = $request->admin_email;
-        $admin_password = md5($request->admin_password);
+        $admin_password =($request->admin_password);
         $result = DB::table('tbl_admin')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
         if (($result)) {
           Session::put('admin_name',$result->admin_name);
