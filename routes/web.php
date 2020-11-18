@@ -214,10 +214,10 @@ Route::get('/print_hoadoncafe/{hoadoncafe_id}', 'HoaDonCafeDetailController@prin
 Route::get('/show_hoadoncafedetail/{hoadoncafe_id}', 'HoadonCafeDetailController@show_hoadoncafedetail');
 
 //phieu thue
-Route::get('/thongke_phieuthue', 'PhieuThueController@thongke_phieuthue');
-//phieuthuedetail
-Route::get('/print_phieuthue/{phieuthue_id}', 'PhieuThueDetailController@print_phieuthue');
-Route::get('/show_phieuthuedetail/{phieuthue_id}', 'PhieuThueDetailController@show_phieuthuedetail');
+Route::get('/thongke_hoadonkaraoke', 'HoaDonKaraokeController@thongke_hoadonkaraoke');
+//hoadonkaraokedetail
+Route::get('/print_hoadonkaraoke/{hoadonkaraoke_id}', 'HoaDonKaraokeDetailController@print_hoadonkaraoke');
+Route::get('/show_hoadonkaraokedetail/{hoadonkaraoke_id}', 'HoaDonKaraokeDetailController@show_hoadonkaraokedetail');
 
 //nguyenlieu
 Route::get('/add_nguyenlieu', 'NguyenlieuController@add_nguyenlieu');

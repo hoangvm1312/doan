@@ -46,7 +46,8 @@ class HoadonCafeController extends Controller
     {
         $this->AuthLogin();
         DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->delete();
+        DB::table('tbl_hoadoncafedetail')->where('hoadoncafe_id',$hoadoncafe_id)->delete();
         Session::put('message','Xóa thành công!');
-        return Redirect::to('all_hoadoncafe');
+        return Redirect::to('thongke_hoadoncafe');
     }
 }

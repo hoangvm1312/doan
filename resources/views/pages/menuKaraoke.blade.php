@@ -29,8 +29,8 @@
                                         @endif
                                         <div class="img-product">
                                         @if(isset($phong_id))
-                                            <img src="{{('../../public/uploads/product/'.$sanpham->sanpham_image)}}">
-                                        @else <img src="{{('../public/uploads/product/'.$sanpham->sanpham_image)}}">
+                                            <img src="{{('../../public/uploads/sanpham/'.$sanpham->sanpham_image)}}">
+                                        @else <img src="{{('../public/uploads/sanpham/'.$sanpham->sanpham_image)}}">
                                         @endif
                                         </div>
                                         <div class="product-info">
@@ -68,7 +68,7 @@
                         <table class="table table-bordered">
                           <thead class="thead-light">
                             <tr>
-                              <th scope="col">STT</th>
+ 
                               <th scope="col">Tên sản phẩm</th>
                               <th scope="col">Số lượng</th>
                               <th scope="col">Gía bán</th>
@@ -80,7 +80,7 @@
                             @if(isset($all_hoadon))
                                 @foreach($all_hoadon as $key=>$hoadon)
                                 <tr>
-                                    <td scope="col">1</th>
+      
                                     <td scope="col">{{$hoadon->sanpham_name}}</td>
                                     <td>
                                         <div class="input-group spinner">

@@ -69,10 +69,12 @@ class NguyenlieuController extends Controller
     public function update_nguyenlieu(Request $request, $nguyenlieu_id)
     {
         $this->AuthLogin();
+        $time=Carbon::now('Asia/Ho_Chi_Minh');
         $data['nguyenlieu_name'] = $request->nguyenlieu_name;
         $data['nguyenlieu_nums'] = $request->nguyenlieu_nums;
         $data['dvt'] = $request->dvt;
         $data['nguyenlieu_price'] = $request->nguyenlieu_price;
+        $data['nguyenlieu_ngaynhap'] = $time;
         $get_image = $request->file('nguyenlieu_image');
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName(); //lấy tên ảnh

@@ -6,7 +6,6 @@
 	<table class="table">
 	  <thead>
 	    <tr>
-	      <th scope="col">STT</th>
 	      <th scope="col">Tên khách hàng</th>
 	      <th scope="col">Loại công nợ</th>
 	      <th scope="col">Số điện thoại</th>
@@ -20,7 +19,6 @@
 	  	@if(isset($khachhang_cafe))
 		  	@foreach($khachhang_cafe as $key=>$value)
 			    <tr>
-			      <th scope="row">1</th>
 			      <td>{{$value->khachhang_name}}</td>
 			      <td>Cafe</td>
 			      <td>{{$value->khachhang_sdt}}</td>
@@ -35,7 +33,6 @@
 	    @if(isset($khachhang_karaoke))
 		  	@foreach($khachhang_karaoke as $key=>$value)
 			    <tr>
-			      <th scope="row">1</th>
 			      <td>{{$value->khachhang_name}}</td>
 			      <td>Karaoke</td>
 			      <td>{{$value->khachhang_sdt}}</td>
@@ -57,7 +54,6 @@
 		<table class="table">
 	  <thead>
 	    <tr>
-	      <th scope="col">STT</th>
 	      <th scope="col">Sản phẩm</th>
 	      <th scope="col">Số lượng</th>
 	      <th scope="col">Đơn giá</th>
@@ -70,7 +66,6 @@
 	  	@if(isset($hoadoncafe))
 		  	@foreach($hoadoncafe as $key=>$value)
 			    <tr>
-			      <td>1</td>
 			      <td>{{$value->sanpham_name}}</td>
 			      <td>{{$value->hoadoncafeDetail_nums}}</td>
 			      <td>{{$value->sanpham_price}}</td>
@@ -79,7 +74,6 @@
 		    @endforeach
 		    	<tr>
 			      <th scope="row">Tổng tiền</th>
-			      <td></td>
 			      <td></td>
 			      <td></td>
 			      <td><strong>{{$value->hoadoncafe_price}} VNĐ</strong></td>
@@ -109,7 +103,6 @@
 
 			    <tr><strong>
 			      <th scope="row">Tổng tiền</th>
-			      <td></td>
 			      <td></td>
 			      <td></td>
 			      <td><strong>{{$value->hoadonkaraoke_price}} VNĐ</strong></td>

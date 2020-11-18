@@ -32,11 +32,11 @@
                             <?php
                                     if($ban->bancafe_status==0){
                                     ?>
-                            <a href ="{{URL::to('/unactive_bancafe/'.$ban->bancafe_id)}}"> <span class="fa-thumb-styling fa fa-toggle-off"></span></a>
+                            <a><span>Chưa thanh toán<span></a>
                             <?php
                                     }else{
                                     ?>
-                             <a href ="{{URL::to('/active_bancafe/'.$ban->bancafe_id)}}"> <span class="fa-thumb-styling fa fa-toggle-on"></span></a>
+                             <a><span>Đã thanh toán<span></a>
                             <?php
                                     }
                                     ?>

@@ -354,7 +354,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <ul class="sub">
                             <li><a href="{{URL::to('/add_sanpham')}}"> Thêm sản phẩm </a></li>
                             <li><a href="{{URL::to('/all_sanpham')}}"> Liệt kê sản phẩm</a></li>
-                            <li class="sub-menu">
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="fa fa-book"></i>
                                     <span>Loại sản phẩm</span>
@@ -364,8 +366,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <li><a href="{{URL::to('/all_loaisanpham')}}"> Liệt kê danh sách loại sản phẩm</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                    </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-industry"></i>
@@ -383,7 +383,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </a>
                     </li>
                     <li class="sub-menu">
-                        <a href="{{URL::to('/thongke_phieuthue')}}">
+                        <a href="{{URL::to('/thongke_hoadonkaraoke')}}">
                             <i class="fa fa-file"></i>
                             <span>Hóa đơn Karaoke</span>
                         </a>
