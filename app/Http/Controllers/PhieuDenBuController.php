@@ -126,10 +126,10 @@ class PhieuDenBuController extends Controller
 
     			<tr>	
     				<td>'.$value->thietbi_name.'</td>
-    				<td>'.$value->phieudenbuDetail_cost.' VNĐ</td>
+    				<td>'.number_format($value->phieudenbuDetail_cost).' vnđ</td>
     				<td>'.$value->phieudenbuDetail_nums.'</td>
     				<td>'.$value->phieudenbuDetail_reason.'</td>
-    				<td>'.$value->phieudenbuDetail_price.'</td>
+    				<td>'.number_format($value->phieudenbuDetail_price).' vnđ</td>
     			</tr>';
     		}
     		$output.='
@@ -138,7 +138,7 @@ class PhieuDenBuController extends Controller
     				<td></td>
     				<td></td>
     				<td></td>
-    				<td><strong>'.$phieudenbu->phieudenbu_price.' VNĐ</strong></td>
+    				<td><strong>'.number_format($phieudenbu->phieudenbu_price).' vnđ</strong></td>
     				
     			</tr>';
     		$output.='

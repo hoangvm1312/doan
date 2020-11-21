@@ -78,8 +78,8 @@ class OrderController extends Controller
     			<tr>	
     				<td>'.$value->sanpham_name.'</td>
     				<td><center>'.$value->hoadoncafeDetail_nums.'</center></td>
-    				<td>'.$value->sanpham_price.' VNĐ</td>
-    				<td>'.$value->hoadoncafeDetail_nums*$value->sanpham_price.' VNĐ</td>
+    				<td>'.number_format($value->sanpham_price).' vnđ</td>
+    				<td>'.number_format($value->hoadoncafeDetail_nums*$value->sanpham_price).' vnđ</td>
     			</tr>';
     		}
     		$output.='
@@ -87,7 +87,7 @@ class OrderController extends Controller
     				<td><strong>Tổng cộng: </strong></td>
     				<td></td>
     				<td></td>
-    				<td><strong>'.$hoadon->hoadoncafe_price.' VNĐ</strong></td>
+    				<td><strong>'.number_format($hoadon->hoadoncafe_price).' vnđ</strong></td>
     				
     			</tr>';
     		$output.='
@@ -160,23 +160,23 @@ class OrderController extends Controller
                 <tr>    
                     <td>'.$value->sanpham_name.'</td>
                     <td>'.$value->hoadonkaraokeDetail_nums.'</td>
-                    <td>'.$value->sanpham_price.' VNĐ</td>
-                    <td>'.$value->hoadonkaraokeDetail_nums*$value->sanpham_price.' VNĐ</td>
+                    <td>'.number_format($value->sanpham_price).' vnđ</td>
+                    <td>'.number_format($value->hoadonkaraokeDetail_nums*$value->sanpham_price).' vnđ</td>
                 </tr>';
             }
             $output.='
                 <tr>
                     <td>Phòng '.$tenphong.'</td>
                     <td>'.$hoadon->hoadonkaraoke_time.' giờ</td>
-                    <td>'.$loaiphong_price.' VNĐ</td>
-                    <td>'.$loaiphong_price*$hoadon->hoadonkaraoke_time.' VNĐ</td>
+                    <td>'.number_format($loaiphong_price).' vnđ</td>
+                    <td>'.number_format($loaiphong_price*$hoadon->hoadonkaraoke_time).' vnđ</td>
                 </tr>';
             $output.='
                 <tr>    
                     <td><strong>Tổng cộng: </strong></td>
                     <td></td>
                     <td></td>
-                    <td><strong>'.$hoadon->hoadonkaraoke_price.' VNĐ</strong></td>
+                    <td><strong>'.number_format($hoadon->hoadonkaraoke_price).' vnđ</strong></td>
                 </tr>';
             $output.='
             </tbody>

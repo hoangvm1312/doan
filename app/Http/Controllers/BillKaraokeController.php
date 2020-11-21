@@ -49,13 +49,18 @@ class BillKaraokeController extends Controller
         ->pluck('loaiphong_price')
         ->first();
 
+        $tenphong=DB::table('tbl_phong')
+        ->where('phong_id',$phong_id)
+        ->pluck('phong_name')
+        ->first();
+
         $price_hoadon=0;
         foreach($all_hoadon as $key=>$value){ //Tính tổng tiền hóa đơn
             $price_hoadon=$price_hoadon+$value->hoadonkaraokeDetail_price;
         }
     	
         return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)
-             ->with('price_hoadon',$price_hoadon)->with('phong_price',$phong_price);
+             ->with('price_hoadon',$price_hoadon)->with('phong_price',number_format($phong_price))->with('tenphong',$tenphong);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){

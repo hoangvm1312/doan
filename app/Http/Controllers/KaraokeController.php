@@ -22,7 +22,9 @@ class KaraokeController extends Controller
         $all_loaiphong=DB::table('tbl_loaiphong')->get();
         $all_phong=DB::table('tbl_phong')->where('loaiphong_id',$loaiphong_id)->get();
         $loaisanpham_id=DB::table('tbl_loaisanpham')->pluck('loaisanpham_id')->first();
-        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong)->with('all_phong',$all_phong)->with('loaisanpham_id',$loaisanpham_id);
+        $tongban=DB::table('tbl_bancafe')->where('bancafe_status',1)->get();
+        $tongphong=DB::table('tbl_phong')->where('phong_status',1)->get();
+        return view('pages.karaoke')->with('all_loaiphong',$all_loaiphong)->with('all_phong',$all_phong)->with('loaisanpham_id',$loaisanpham_id)->with('tongban',$tongban)->with('tongphong',$tongphong);
     }
 
     //copy

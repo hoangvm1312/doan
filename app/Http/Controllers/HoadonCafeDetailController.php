@@ -25,8 +25,9 @@ class HoadonCafeDetailController extends Controller
 
         $detail_hoadoncafe = DB::table('tbl_hoadoncafedetail')
             ->join('tbl_sanpham','tbl_hoadoncafedetail.sanpham_id','=','tbl_sanpham.sanpham_id')
-            ->join('tbl_bancafe', 'tbl_hoadoncafedetail.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
+            
             ->join('tbl_hoadoncafe','tbl_hoadoncafedetail.hoadoncafe_id','=','tbl_hoadoncafe.hoadoncafe_id')
+            ->join('tbl_bancafe', 'tbl_hoadoncafe.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
             ->orderby('tbl_hoadoncafedetail.hoadoncafe_id', 'desc')->get()->where('hoadoncafe_id',$hoadoncafe_id);
         $manager_hoadoncafedetail = view('admin.show_hoadoncafedetail')->with('show_hoadoncafedetail',$detail_hoadoncafe);
         return view('Admin_Layout')->with('admin.show_hoandoncafedetail', $manager_hoadoncafedetail);
@@ -41,8 +42,9 @@ class HoadonCafeDetailController extends Controller
         return $data;*/
         $data = DB::table('tbl_hoadoncafedetail')
             ->join('tbl_sanpham','tbl_hoadoncafedetail.sanpham_id','=','tbl_sanpham.sanpham_id')
-            ->join('tbl_bancafe', 'tbl_hoadoncafedetail.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
+            
             ->join('tbl_hoadoncafe','tbl_hoadoncafedetail.hoadoncafe_id','=','tbl_hoadoncafe.hoadoncafe_id')
+            ->join('tbl_bancafe', 'tbl_hoadoncafe.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
             ->orderby('tbl_hoadoncafedetail.hoadoncafe_id', 'desc')->get()->where('hoadoncafe_id',$hoadoncafe_id);
         return $data;
     }
@@ -64,9 +66,9 @@ class HoadonCafeDetailController extends Controller
         }
         </style>
         <title>Xuất hóa đơn</title>
-        <h1 style=" font-size: large"><center>Công ty TNHH Việt Mỹ Thành Tín</center></h1>
-        <h4 style="font-size: 8px; margin-bottom: 0; padding: 0"><right>Địa chỉ liên hệ:</right></h4>
-        <h4 style="font-size: 8px;"><left>Số điện thoại:</left></h4>
+        <h1 style=" font-size: large"><center>Công ty TNHH Tín Thành Việt Mỹ</center></h1>
+        <h4 style="font-size: 8px; margin-bottom: 0; padding: 0"><right>Địa chỉ: 9/2/18 Khúc Thừa Dụ 2, phường Vĩnh Niệm, quận Lê Chân, Thành phố Hải Phòng.</right></h4>
+        <h4 style="font-size: 8px;"><left>Số điện thoại:0383161077</left></h4>
         <h1 style="font-size: medium"><center>HÓA ĐƠN CÀ PHÊ</center></h1>';
         foreach($data as $key => $detail)
             $i=1;

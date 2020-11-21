@@ -1,6 +1,19 @@
 html{
 	height: 100%;
 }
+/*Dành cho điện thoại*/
+@media all and (max-width: 480px) {
+ 	.header-cashier{
+ 		width: 25%;
+ 	}
+}
+ 
+/* Dành cho máy tính bảng */
+@media all and (max-width: 1024px) {
+ 	.header-cashier{
+ 		width: 50%;
+ 	}
+}
 .table td, .table th{
 	padding: 5px 10px;
 }

@@ -44,6 +44,9 @@ class BillController extends Controller
         ->where('bancafe_id',$bancafe_id)
         ->pluck('hoadoncafe_id')->first();
         
+        $tenban=DB::table('tbl_bancafe')
+        ->where('bancafe_id',$bancafe_id)
+        ->pluck('bancafe_name')->first();
 
         $price_hoadon=0;
         foreach($all_hoadon as $key=>$value){ //Tính tổng tiền hóa đơn
@@ -51,7 +54,7 @@ class BillController extends Controller
         }
           	
         return view('pages.menu')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham)
-        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id)->with('price_hoadon',$price_hoadon)->with('hoadoncafe_id',$hoadon_id);
+        ->with('all_hoadon',$all_hoadon)->with('ban_id',$bancafe_id)->with('price_hoadon',number_format($price_hoadon))->with('hoadoncafe_id',$hoadon_id)->with('tenban',$tenban);
     }
 
     public function plusProduct($sanpham_id,$hoadoncafe_id){

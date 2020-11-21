@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="product-info">
                                             <span class="product-name">{{$sanpham->sanpham_name}}</span><br>
-                                            <strong>{{$sanpham->sanpham_price}} VND</strong>
+                                            <strong>{{number_format($sanpham->sanpham_price)}} vnđ</strong>
                                         </div>
                                     </a>
                                     </li>
@@ -50,19 +50,27 @@
 
             <!-- bill -->  
              <div class="col-md-6 content-listmenu" id="content-listmenu"> <!-- Bảng hóa đơn -->
-                <div class="row" id="bill-info">
+                <div class="input-group spinner" style="width: 700px ; height: 20px">
+                @if(isset($tenban))
+                 <input  type="text" class="form-control quantity-product-oders" value="{{$tenban}}">
+                @endif
+
+            </div>
+             <div class="row" id="bill-info">
                     <div class="col-md-2 table-infor">                     
                     </div>
                 </div>
                 <div class="row bill-detail">
+
                     <div class="col-md-12 bill-detail-content">
+
                         <table class="table table-bordered">
                           <thead class="thead-light">
                             <tr>
 
                               <th scope="col">Tên sản phẩm</th>
                               <th scope="col">Số lượng</th>
-                              <th scope="col">Gía bán</th>
+                              <th scope="col">Đơn giá</th>
                               <th scope="col">Thành Tiền</th>
                               <th scope="col"></th>
                             </tr>
@@ -81,8 +89,8 @@
                                         </div>
                                     </td>
 
-                                    <td scope="col">{{$hoadon->sanpham_price}}</td>
-                                    <td  class="text-center total-money">{{$hoadon->hoadoncafeDetail_nums*$hoadon->sanpham_price}}</td>
+                                    <td scope="col">{{number_format($hoadon->sanpham_price)}} vnđ</td>
+                                    <td  class="text-center total-money">{{number_format($hoadon->hoadoncafeDetail_nums*$hoadon->sanpham_price)}} vnđ</td>
                                     <td class="text-center">
                                         <a href="{{URL::to('/delete/'.$hoadon->sanpham_id.'/'.$hoadon->hoadoncafe_id)}}" class="button-select"><button name="delete" action="submit">
                                             <i class="fa fa-times-circle del-pro-order"></i>
