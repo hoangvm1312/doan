@@ -109,7 +109,7 @@
                         <div class="row">
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadoncafe_id))
-                                <a href="{{URL::to('/thanh-toan-cafe/'.$hoadoncafe_id)}}" class='button-select'  target="_blank">
+                                <a href="{{URL::to('/thanh-toan-cafe/'.$hoadoncafe_id)}}" class='button-select'  target="_blank" onclick="return confirm('Xác nhận thanh toán?')">
                                 @else 
                                     <a href="#" class='button-select'>
                                 @endif
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadoncafe_id))
-                                    <a href="{{URL::to('/cong-no-cafe/'.$hoadoncafe_id)}}" class='button-select' target="_blank">
+                                    <a href="{{URL::to('/cong-no-cafe/'.$hoadoncafe_id)}}" class='button-select' target="_blank" onclick="return confirm('Xác nhận lưu công nợ?')">
                                 @else
                                     <a href="#" class='button-select'>
                                 @endif

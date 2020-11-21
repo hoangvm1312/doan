@@ -60,7 +60,7 @@ class BillKaraokeController extends Controller
         }
     	
         return view('pages.menuKaraoke')->with('all_loaisanpham',$all_loaisanpham)->with('all_sanpham',$all_sanpham) ->with('all_hoadon',$all_hoadon)->with('phong_id',$phong_id)->with('hoadon',$hoadon)
-             ->with('price_hoadon',$price_hoadon)->with('phong_price',number_format($phong_price))->with('tenphong',$tenphong);
+             ->with('price_hoadon',number_format($price_hoadon))->with('phong_price',number_format($phong_price))->with('tenphong',$tenphong);
     }
 
     public function plusProduct($sanpham_id,$hoadonkaraoke_id){
@@ -119,9 +119,9 @@ class BillKaraokeController extends Controller
         return Redirect::to('/karaoke-select-product/'.$phong_id.'/'.$sanpham->loaisanpham_id);
     }
 
-    public function chooseProduct($sanpham_id,$ban_id){
+    public function chooseProduct($sanpham_id,$phong_id){
         $this->AuthLogin_frontend();
-        $bill=DB::table('tbl_hoadonkaraoke')->where('phong_id',$ban_id)->where('hoadonkaraoke_status','1')->orderby('hoadonkaraoke_id','desc')->first();
+        $bill=DB::table('tbl_hoadonkaraoke')->where('phong_id',$phong_id)->where('hoadonkaraoke_status','1')->orderby('hoadonkaraoke_id','desc')->first();
         if(is_null($bill)){ //Bàn trống, chưa có hoá đơn
 
                 $sanpham=DB::table('tbl_sanpham')->where('sanpham_id',$sanpham_id)->first(); //Lấy sản phẩm
@@ -129,7 +129,7 @@ class BillKaraokeController extends Controller
                 $name = Session::get('admin_name');
                 //Tạo hóa đơn   
                 $hoadon=array();
-                $hoadon['phong_id']=$ban_id;
+                $hoadon['phong_id']=$phong_id;
                 $hoadon['hoadonkaraoke_timein']=$time;
                 $hoadon['hoadonkaraoke_timeout']=$time;
                 $hoadon['hoadonkaraoke_nguoi']=$name;
@@ -147,10 +147,10 @@ class BillKaraokeController extends Controller
                 $hoadonDetail['hoadonkaraokeDetail_price']=$sanpham->sanpham_price*1;
                 DB::table('tbl_hoadonkaraokeDetail')->insert($hoadonDetail);
 
-                DB::table('tbl_phong')->where('phong_id',$ban_id)->update(['phong_status'=>1]);
+                DB::table('tbl_phong')->where('phong_id',$phong_id)->update(['phong_status'=>1]);
                 //Cập nhật giá trong hóa đơn
                 DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadon_complete->hoadonkaraoke_id)->update(['hoadonkaraoke_price'=>$sanpham->sanpham_price]);
-                return Redirect::to('/karaoke-select-product/'.$ban_id.'/'.$sanpham->loaisanpham_id);
+                return Redirect::to('/karaoke-select-product/'.$phong_id.'/'.$sanpham->loaisanpham_id);
         }
         else{
 
@@ -168,7 +168,7 @@ class BillKaraokeController extends Controller
                     //cập nhật giá trong hóa đơn
                     $price=DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$bill->hoadonkaraoke_id)->pluck('hoadonkaraoke_price')->first();
                     DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$bill->hoadonkaraoke_id)->update(['hoadonkaraoke_price'=>$price+$sanpham->sanpham_price]);
-                    return Redirect::to('/karaoke-select-product/'.$ban_id.'/'.$sanpham->loaisanpham_id);
+                    return Redirect::to('/karaoke-select-product/'.$phong_id.'/'.$sanpham->loaisanpham_id);
                 }
                 else{ //Trường hợp thêm món đã có trong hóa đơn
                     $nums=DB::table('tbl_hoadonkaraokeDetail')
@@ -195,7 +195,7 @@ class BillKaraokeController extends Controller
                     $price_hd=DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$bill->hoadonkaraoke_id)->pluck('hoadonkaraoke_price')->first();
                     DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$bill->hoadonkaraoke_id)->update(['hoadonkaraoke_price'=>$price_hd+$sanpham->sanpham_price]);
 
-                    return Redirect::to('/karaoke-select-product/'.$ban_id.'/'.$sanpham->loaisanpham_id);
+                    return Redirect::to('/karaoke-select-product/'.$phong_id.'/'.$sanpham->loaisanpham_id);
                 }
                 
                 
@@ -211,7 +211,17 @@ class BillKaraokeController extends Controller
         $timeUse=$timenow->diffInMinutes($hoadonkaraoke->hoadonkaraoke_timein)/60;
         
         $timeUse=number_format((float)$timeUse, 1, '.', '');
+        $num=floor($timeUse);
+        //Làm tròn giờ hát
         if($timeUse<1) $timeUse=1;
+        else if ($timeUse-$num<0.5 && $timeUse-$num>0){
+            $timeUse=$timeUse+(0.5-($timeUse-$num));
+        }
+        else if($timeUse-$num<0.9 && $timeUse-$num>0.5){
+            $timeUse=$timeUse+(1-($timeUse-$num));
+        }
+
+
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_time'=>$timeUse]);
         //lấy giá loại phòng
         $loaiphong_price= DB::table('tbl_phong')
@@ -224,6 +234,8 @@ class BillKaraokeController extends Controller
         //Cập nhật tổng tiền vào csdl
         DB::table('tbl_hoadonkaraoke')->where('hoadonkaraoke_id',$hoadonkaraoke_id)->update(['hoadonkaraoke_price'=>$money]);
         //Chuyển sang in hóa đơn
+        
+
         return Redirect::to('/thanh-toan-karaoke/'.$hoadonkaraoke_id.'/'.$loaiphong_price);
     }
 }

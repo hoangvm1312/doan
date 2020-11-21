@@ -10,6 +10,7 @@ use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use App\Helper\Readnumb;
 session_start();
 use PDF;
 class OrderController extends Controller
@@ -93,6 +94,7 @@ class OrderController extends Controller
     		$output.='
     		</tbody>
     	</table>
+        <h5><center>('.Readnumb::docso($hoadon->hoadoncafe_price).' đồng)</center></h5>
         <br><br>
         <h4><center>Cảm ơn quý khách</center></h4>';
 
@@ -124,7 +126,7 @@ class OrderController extends Controller
         ->join('tbl_phong','tbl_phong.phong_id','=','tbl_hoadonkaraoke.phong_id')
         ->pluck('phong_name')->first();;
         //update giá trong hóa đơn
-
+        
 
 
         $output='';
@@ -181,6 +183,7 @@ class OrderController extends Controller
             $output.='
             </tbody>
         </table>
+        <h5><center>('.Readnumb::docso($hoadon->hoadonkaraoke_price).' đồng)</center></h5>
         <br><br>
         <h4><center>Cảm ơn quý khách</center></h4>';
 
@@ -189,6 +192,7 @@ class OrderController extends Controller
         //Cập nhật trạng thái phòng
         DB::table('tbl_phong')
         ->join('tbl_hoadonkaraoke','tbl_phong.phong_id','=','tbl_hoadonkaraoke.phong_id')
+        ->where('tbl_hoadonkaraoke.hoadonkaraoke_id',$hoadonkaraoke_id)
         ->update(['phong_status'=>0]);
 
         return $output;

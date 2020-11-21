@@ -25,7 +25,7 @@
                 </div>
                 <a class='button-selected'  href="{{URL::to('/tim-thong-tin-cong-no')}}"><button style="margin-left: 700px" type="button" class="btn btn-warning">Thanh toán công nợ</button></a>
                 <a class='button-selected' href="{{URL::to('/nhap-thiet-bi')}}"><button style="margin-left: 10px" type="button" class="btn btn-secondary">Lập phiếu đền bù</button></a>
-                <a class='button-selected' href="{{URL::to('/logout_frontend')}}"><button style="margin-left: 10px" type="button" class="btn btn-secondary">Đăng xuất</button></a>
+                <a class='button-selected' href="{{URL::to('/logout_frontend')}} "onclick="return confirm('Bạn có muốn đăng xuất?')"><button style="margin-left: 10px" type="button" class="btn btn-secondary">Đăng xuất</button></a>
             </div>
         </div>
     </div>
@@ -35,8 +35,8 @@
         <div class="row content">
            @yield('content')
 
-           @if(!isset($all_loaisanpham))
-            @if(isset($tongban))
+      
+            @if(isset($tongban) || isset($tongphong))
             <div class="col-md-6 content-listmenu" id="content-listmenu"> <!-- Bảng hóa đơn -->
                 <div class="row" id="bill-info">
                     <div class="col-md-2 table-infor">                     
@@ -73,17 +73,17 @@
 
                           </tbody>
                         </table>
-                        <button  type="button" class="btn btn-outline-danger">Bàn cafe đang hoạt động: {{$tongban->count()}}</button>          
+                        <button  type="button" class="btn btn-outline-danger"><strong>Bàn cafe đang hoạt động: {{$tongban->count()}}</strong></button>          
 
-                        <button style="float:right; margin-right: 30px" type="button" class="btn btn-outline-danger">Phòng karaoke đang hoạt động: {{$tongphong->count()}}</button>
-                        
+                        <button style="float:right; margin-right: 30px" type="button" class="btn btn-outline-danger"><strong>Phòng karaoke đang hoạt động: {{$tongphong->count()}}</strong></button>
+
                     </div>
 
                 </div>
 
             </div>
 @endif
-@endif
+
 
 
 

@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use App\Helper\Readnumb;
 session_start();
 use App\PhieuDenBu;
 
@@ -144,6 +145,7 @@ class PhieuDenBuController extends Controller
     		$output.='
     		</tbody>
     	</table>
+        <h5><center>('.Readnumb::docso($phieudenbu->phieudenbu_price).' đồng)</center></h5>
         <br><br>
         <h4><center>Cảm ơn quý khách</center></h4>';
 

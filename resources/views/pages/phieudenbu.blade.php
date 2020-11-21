@@ -36,7 +36,7 @@
 	  </tbody>
 	</table>
 	<div id="newRow"></div>
-	<button type="submit"  name="add_phieudenbu" class="btn btn-info">Thêm phiếu</button>
+	<button type="submit"  name="add_phieudenbu" class="btn btn-info" onclick="return confirm('Xác nhận thêm phiếu đền bù?')">Thêm phiếu</button>
 </form>
 
 

@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadon))
-                                <a href="{{URL::to('/check-out-karaoke/'.$hoadon->hoadonkaraoke_id.'/'.$phong_id)}}" class='button-select'  target="_blank">
+                                <a href="{{URL::to('/check-out-karaoke/'.$hoadon->hoadonkaraoke_id.'/'.$phong_id)}}" class='button-select' onclick="return confirm('Xác nhận thanh toán?')" target="_blank">
                                 @else 
                                     <a href="#" class='button-select'>
                                 @endif
@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-md-6 col-xs-6 p-1">
                                 @if(isset($hoadon))
-                                    <a href="{{URL::to('/cong-no-karaoke/'.$hoadon->hoadonkaraoke_id)}}" class='button-select' target="_blank">
+                                    <a href="{{URL::to('/cong-no-karaoke/'.$hoadon->hoadonkaraoke_id)}}" class='button-select' onclick="return confirm('Xác nhận lưu công nợ?')" target="_blank">
                                 @else
                                     <a href="#" class='button-select'>
                                 @endif

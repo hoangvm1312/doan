@@ -32,6 +32,7 @@
 				<input type="text" name="numb"><br><br>
 				<input type="submit" value="Xác nhận">
 			</form>
+			
 		@endif
 	</center>
 @endsection
