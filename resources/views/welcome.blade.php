@@ -50,6 +50,7 @@
 
                               <th scope="col">Tên phòng/ bàn</th>
                               <th scope="col">Trạng thái</th>
+                              <th scope="col">Chi tiết</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -60,6 +61,9 @@
                                     <td>   
                                       Đang hoạt động
                                     </td>
+                                    <td> 
+                                      <a href="{{URL::to('/cafe-select-product/'.$value->bancafe_id.'/'.$loaisanpham_id)}}"><button>Xem</button></a>
+                                    </td>
                                 </tr>
                                 @endforeach 
                                 @foreach($tongphong as $key=>$value) 
@@ -68,17 +72,24 @@
                                     <td>  
                                       Đang hoạt động 
                                     </td>
+                                    <td>  
+                                      <a href="{{URL::to('/karaoke-select-product/'.$value->phong_id.'/'.$loaisanpham_id)}}"><button>Xem</button></a>
+                                    </td>
+                                    </td>
                                 </tr>
                                @endforeach 
 
                           </tbody>
                         </table>
-                        <button  type="button" class="btn btn-outline-danger"><strong>Bàn cafe đang hoạt động: {{$tongban->count()}}</strong></button>          
-
-                        <button style="float:right; margin-right: 30px" type="button" class="btn btn-outline-danger"><strong>Phòng karaoke đang hoạt động: {{$tongphong->count()}}</strong></button>
+                        
 
                     </div>
+                        
+                        <button  style="margin-top: 10px; " type="button" class="btn btn-outline-danger"><strong>Bàn cafe đang hoạt động: {{$tongban->count()}}</strong></button>          
 
+                        <button style=" margin-top: 10px;" type="button" class="btn btn-outline-danger"><strong>Phòng karaoke đang hoạt động: {{$tongphong->count()}}
+                        </strong></button>
+      
                 </div>
 
             </div>
@@ -116,5 +127,17 @@
 
 </div>
 
+
+
 </body>
+<footer style="position:absolute;bottom:0;width: 100%"class="header-cashier">
+
+  <div style="color: white">
+    <p style="margin-bottom: 3px; margin-left: 70px">Sản phẩm thuộc quyền sở hữu công ty Hoàng Ngọc Đạt</p>
+    <p style="margin-bottom: 3px; margin-left: 70px">Địa chỉ: 242 Lạch Tray, Ngô Quyền, Hải Phòng</p>
+    <p style="margin-left: 70px">Hotline: 1900561252</p>
+  </div>
+
+  
+</footer>
 </html>

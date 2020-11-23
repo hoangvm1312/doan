@@ -101,6 +101,7 @@ class OrderController extends Controller
     	DB::table('tbl_hoadoncafe')->where('hoadoncafe_id',$hoadoncafe_id)->update(['hoadoncafe_status'=>0]);
     	DB::table('tbl_bancafe')
     	->join('tbl_hoadoncafe','tbl_bancafe.bancafe_id','=','tbl_hoadoncafe.bancafe_id')
+        ->where('tbl_hoadoncafe.hoadoncafe_id',$hoadoncafe_id)
     	->update(['bancafe_status'=>0]);
 
     	return $output;

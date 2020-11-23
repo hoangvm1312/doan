@@ -9,7 +9,7 @@
 		  <input type="text" name="name"><br><br>
 		  <label for="lname">Số điện thoại:</label>
 		  <input type="text" name="numb"><br><br>
-		  <input type="submit" value="Xác nhận cafe">
+		  <input type="submit" value="Xác nhận" onclick="return confirm('Xác nhận lưu công nợ?')">
 		</form>
 		
 
@@ -22,7 +22,7 @@
 		  <input type="text" name="namek"><br><br>
 		  <label for="lname">Số điện thoại:</label>
 		  <input type="text"name="numbk"><br><br>
-		  <input type="submit" value="Xác nhận karaoke">
+		  <input type="submit" value="Xác nhận" onclick="return confirm('Xác nhận lưu công nợ?')">
 
 
 		@else
@@ -32,7 +32,7 @@
 				<input type="text" name="numb"><br><br>
 				<input type="submit" value="Xác nhận">
 			</form>
-			
+
 		@endif
 	</center>
 @endsection
