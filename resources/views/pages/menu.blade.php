@@ -59,7 +59,7 @@
                         <table class="table table-bordered">
                           <thead class="thead-light">
                             <tr>
-                              <th scope="col">STT</th>
+                             
                               <th scope="col">Tên sản phẩm</th>
                               <th scope="col">Số lượng</th>
                               <th scope="col">Gía bán</th>
@@ -71,7 +71,7 @@
                             @if(isset($all_hoadon))
                                 @foreach($all_hoadon as $key=>$hoadon)
                                 <tr>
-                                    <td scope="col">1</th>
+                         
                                     <td scope="col">{{$hoadon->sanpham_name}}</td>
                                     <td>
                                         <div class="input-group spinner">
@@ -129,7 +129,7 @@
                             <label class="col-form-label col-md-4"><b>Tổng cộng</b></label>
                             <div class="col-md-8">
                                 @if(isset($price_hoadon))
-                                <input type="text" value="{{$price_hoadon}}" class="form-control total-pay" disabled="disabled">
+                                <input type="text" value="{{$price_hoadon}} VNĐ" class="form-control total-pay" disabled="disabled">
                                 @endif
                             </div>
                         </div>

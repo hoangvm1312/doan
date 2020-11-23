@@ -43,11 +43,11 @@
                             <?php
                                     if($thongke->hoadoncafe_status==0){
                                     ?>
-                            <a href ="{{URL::to('/unactive_hoadoncafe/'.$thongke->hoadoncafe_id)}}"> <span class="fa-thumb-styling fa fa-check-square-o"></span></a>
+                            <a> <span>Đã thanh toán</span></a>
                             <?php
                                     }else{
                                     ?>
-                             <a href ="{{URL::to('/active_hoadoncafe/'.$thongke->hoadoncafe_id)}}"> <span class="fa-thumb-styling fa fa-square-o"></span></a>
+                             <a> <span>Chưa thanh toán</span></a>
                             <?php
                                     }
                                     ?>
@@ -57,8 +57,6 @@
                                 <a href="{{URL::to('/show_hoadoncafedetail/'.$thongke->hoadoncafe_id)}}" class="active styling edit" ui-toggle-class="">
                                     <i class="fa fa-file-text-o"></i></a>
 {{--                                @endforeach--}}
-                                <a onclick="return confirm('Bạn có muốn xóa hóa đơn này không?')" href="{{URL::to('/delete_hoadoncafe/'.$thongke->hoadoncafe_id)}}" class="active styling edit" ui-toggle-class="">
-                                    </i><i class="fa fa-times text-danger text"></i></a>
                             </td>
                         </tr>
                     @endforeach

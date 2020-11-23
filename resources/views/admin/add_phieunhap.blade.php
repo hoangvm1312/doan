@@ -16,13 +16,19 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    
                                     <th scope="col">Nguyên liệu</th>
-                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Số lượng nhập</th>
                                     <th scope="col">Đơn vị tính</th>
-                                    <th scope="col">Giá</th>
+                                    <th scope="col">Đơn giá nhập</th>
+                                    <th scope="col">Ngày sản xuất</th>
+                                    <th scope="col">Hạn sử dụng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                        
+
                                         <th scope="col-md-4">
                                             <select name="nguyenlieu_name[]" class="form-control input-sm m-bot15">
                                             @foreach($name_nguyenlieu as $key => $add)
@@ -30,7 +36,9 @@
                                             @endforeach
                                             </select>
                                         </th>
+
                                         <th scope="col"><input type="text"; width="100%"name="phieunhapDetail_nums[]"></th>
+
                                         <th scope="col">
                                             <select name="dvt[]" class="form-control input-sm m-bot15">
                                                 <option>KG</option>
@@ -40,7 +48,13 @@
                                                 <option>Vỉ</option>
                                             </select>
                                         </th>
+
                                         <th scope="col"><input type="text" width="100%" name="phieunhapDetail_cost[]"></th>
+
+                                        <th scope="col"><input type="date"; width="100%"name="phieunhapDetail_hsx[]"></th>
+
+                                        <th scope="col"><input type="date"; width="100%"name="phieunhapDetail_hsd[]"></th>
+
                                         <th ><button class="btn btn-success" type="button" id="add_more_detail">Thêm chi tiết</button></th>
                                 </tbody>
                             </table>
@@ -58,7 +72,8 @@
                         html += '<div id="inputFormRow">';
                         html += '<table class="table table-bordered">';
                         html += '  <tbody>';
-                        html += '  <th scope="col">';
+                    
+                        html += '  <th scope="col">';//
                         html += '  <select name="nguyenlieu_name[]" class="form-control input-sm m-bot15">';
                         html += '  @foreach($name_nguyenlieu as $key => $add)';
                         html += '  <option value="{{$add->nguyenlieu_id}}">{{$add->nguyenlieu_name}}</option>';
@@ -75,6 +90,8 @@
                         html += '  </select>';
                         html += '  </th>';
                         html += '  <th scope="col"><input type="text" width="100%" name="phieunhapDetail_cost[]"></th>';
+                        html += '  <th scope="col"><input type="date" width="100%" name="phieunhapDetail_hsx[]"></th>';
+                        html += '  <th scope="col"><input type="date" width="100%" name="phieunhapDetail_hsd[]"></th>';
                         html += '<div class="input-group-append">';
                         html += '<th><button id="removeRow" type="button" class="btn btn-danger">Remove</button></th>';
                         html += '</div>';

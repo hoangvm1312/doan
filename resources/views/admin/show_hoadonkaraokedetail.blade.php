@@ -20,15 +20,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($show_phieuthuedetail as $key => $detail)
+                @foreach($show_hoadonkaraokedetail as $key => $detail)
                     <tr>
                         <td>{{$detail->sanpham_name}}</td>
-                        <td>{{$detail->phieuthueDetail_nums}}</td>
-                        <td>{{$detail->phieuthueDetail_price}}</td>
+                        <td>{{$detail->hoadonkaraokeDetail_nums}}</td>
+                        <td>{{$detail->hoadonkaraokeDetail_price}}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <a target="_blank"  href="{{url('/print_phieuthue',$detail->phieuthue_id)}}" class="btn btn-danger">In phiếu</a>
+            <a target="_blank"  href="{{url('/print_hoadonkaraoke',$detail->hoadonkaraoke_id)}}" class="btn btn-danger">In phiếu</a>
         </div>
 @endsection

@@ -13,7 +13,7 @@
                 <thead>
                 <tr>
                     </th>
-                    <th>Bàn</th>
+                    <!-- <th>Bàn</th> -->
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
@@ -23,7 +23,7 @@
                 <tbody>
                 @foreach($show_hoadoncafedetail as $key => $detail)
                     <tr>
-                        <td>{{$detail->bancafe_name}}</td>
+                        <!-- <td>{{$detail->bancafe_name}}</td> -->
                         <td>{{$detail->sanpham_name}}</td>
                         <td>{{$detail->hoadoncafeDetail_nums}}</td>
                         <td>{{$detail->hoadoncafeDetail_price}}</td>

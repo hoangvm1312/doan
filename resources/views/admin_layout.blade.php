@@ -346,6 +346,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li><a href="{{URL::to('/all_dvt')}}"> Liệt kê đơn vị tính</a></li>
                         </ul>
                     </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-life-bouy"></i>
+                            <span>Thiết bị</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/add_thietbi')}}"> Thêm thiết bị</a></li>
+                            <li><a href="{{URL::to('/all_thietbi')}}"> Liệt kê thiết bị</a></li>
+                        </ul>
+                    </li>
+
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-coffee"></i>
@@ -383,7 +395,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </a>
                     </li>
                     <li class="sub-menu">
-                        <a href="{{URL::to('/thongke_phieuthue')}}">
+                        <a href="{{URL::to('/thongke_hoadonkaraoke')}}">
                             <i class="fa fa-file"></i>
                             <span>Hóa đơn Karaoke</span>
                         </a>
@@ -391,7 +403,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-file"></i>
-                            <span>Lập phiếu hàng hóa</span>
+                            <span>Phiếu đền bù</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/thongke_phieudenbu')}}">Thống kê</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-file"></i>
+                            <span>Phiếu nhập hàng hóa</span>
                         </a>
                         <ul class="sub">
                             <li><a href="{{URL::to('/add_phieunhap')}}">Lập phiếu</a></li>

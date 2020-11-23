@@ -24,7 +24,7 @@ class BillKaraokeController extends Controller
         }
     }
     public function showBill($phong_id,$loaisanpham_id){
-        $this->AuthLogin();
+        $this->AuthLogin_frontend();
         $all_loaisanpham=DB::table('tbl_loaisanpham')->get();
         $all_sanpham=DB::table('tbl_sanpham')
         ->where('loaisanpham_id',$loaisanpham_id)

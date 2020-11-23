@@ -67,6 +67,14 @@ class PhieuDenBuController extends Controller
     	}
     	
     	else return Redirect::to('/nhap-thiet-bi'); 
+	}
+	public function thongke_phieudenbu()
+    {
+        $this->nhapThietBi();
+        $thongke_phieudenbu = DB::table('tbl_phieudenbu')
+            ->orderby('tbl_phieudenbu.phieudenbu_id', 'desc')->get();
+        $manager_phieudenbu = view('admin.thongke_phieudenbu')->with('thongke_phieudenbu', $thongke_phieudenbu);
+        return view('Admin_Layout')->with('admin.thongke_phieudenbu', $manager_phieudenbu);
     }
     public function print_phieudenbu($id){
         $this->AuthLogin_frontend();

@@ -10,7 +10,7 @@
                 <?php
                 $message = Session::get('message');
                 if($message){
-                    echo'<span class="alert">'.$message.'</span>';
+                    echo'<span class="alert alert-success">'.$message.'</span>';
                     Session::put('$message',null);
                 }
                 ?>
@@ -23,18 +23,11 @@
                                 <input type="text" name="bancafe_name" class="form-control" id="exampleInputEmail1" placeholder="Tên bàn">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassord1">Danh mục sản phẩm</label>
+                                <label for="exampleInputPassord1">Khu vực</label>
                                 <select name="kv_ban" class="form-control input-sm m-bot15">
                                     @foreach($kv_bancafe as $key => $kv)
                                         <option value="{{$kv->khuvuc_id}}">{{$kv->khuvuc_name}}</option>
                                     @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassord1">Trạng thái</label>
-                                <select name="bancafe_status" class="form-control input-sm m-bot15">
-                                    <option value="0">Trống</option>
-                                    <option value="1">Đã sử dụng</option>
                                 </select>
                             </div>
                             <button type="submit" name ="add_bancafe" class="btn btn-info">Thêm bàn cà phê</button>

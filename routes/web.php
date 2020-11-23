@@ -96,6 +96,7 @@ Route::post('/filter-by-date', 'AdminController@filter_by_date');
 Route::post('/admin_dashboard', 'AdminController@dashboard');
 Route::post('/dashboard-filter', 'AdminController@dashboard_filter');
 Route::post('/day-order', 'AdminController@day_order');
+Route::post('/chi-tiet/{$pro->sanpham_id}', 'AdminController@show_dashboard');
 
 
 //category
@@ -193,6 +194,15 @@ Route::get('/all_sanpham', 'SanPhamController@all_sanpham');
 Route::post('/save_sanpham', 'SanPhamController@save_sanpham');
 Route::post('/update_sanpham/{sanpham_id}', 'SanPhamController@update_sanpham');
 
+//thiet bi
+Route::get('/add_thietbi', 'ThietBiController@add_thietbi');
+Route::get('/edit_thietbi/{thietbi_id}', 'ThietBiController@edit_thietbi');
+Route::get('/delete_thietbi/{thietbi_id}', 'ThietBiController@delete_thietbi');
+Route::get('/all_thietbi', 'ThietBiController@all_thietbi');
+
+Route::post('/save_thietbi', 'ThietBiController@save_thietbi');
+Route::post('/update_thietbi/{thietbi_id}', 'ThietBiController@update_thietbi');
+
 //phong
 Route::get('/add_phong', 'PhongController@add_phong');
 Route::get('/edit_phong/{phong_id}', 'PhongController@edit_phong');
@@ -214,10 +224,10 @@ Route::get('/print_hoadoncafe/{hoadoncafe_id}', 'HoaDonCafeDetailController@prin
 Route::get('/show_hoadoncafedetail/{hoadoncafe_id}', 'HoadonCafeDetailController@show_hoadoncafedetail');
 
 //phieu thue
-Route::get('/thongke_phieuthue', 'PhieuThueController@thongke_phieuthue');
-//phieuthuedetail
-Route::get('/print_phieuthue/{phieuthue_id}', 'PhieuThueDetailController@print_phieuthue');
-Route::get('/show_phieuthuedetail/{phieuthue_id}', 'PhieuThueDetailController@show_phieuthuedetail');
+Route::get('/thongke_hoadonkaraoke', 'HoaDonKaraokeController@thongke_hoadonkaraoke');
+//hoadonkaraokedetail
+Route::get('/print_hoadonkaraoke/{hoadonkaraoke_id}', 'HoaDonKaraokeDetailController@print_hoadonkaraoke');
+Route::get('/show_hoadonkaraokedetail/{hoadonkaraoke_id}', 'HoaDonKaraokeDetailController@show_hoadonkaraokedetail');
 
 //nguyenlieu
 Route::get('/add_nguyenlieu', 'NguyenlieuController@add_nguyenlieu');
@@ -254,3 +264,13 @@ Route::get('/add_phieuhuy', 'PhieuHuyDetailController@add_phieuhuy');
 Route::post('/save_phieuhuy', 'PhieuHuyDetailController@save_phieuhuy');
 Route::get('/print_phieuhuy/{phieuhuy_id}', 'PhieuHuyDetailController@print_phieuhuy');
 Route::get('/show_phieuhuydetail/{phieuhuy_id}', 'PhieuHuyDetailController@show_phieuhuydetail');
+
+//phieu den bu
+Route::get('/add_phieudenbu', 'PhieuDenBuController@add_phieudenbu');
+Route::get('/thongke_phieudenbu', 'PhieuDenBuController@thongke_phieudenbu');
+//phieudenbudetail
+Route::get('/add_phieudenbu', 'PhieuDenBuDetailController@add_phieudenbu');
+Route::post('/save_phieudenbu', 'PhieuDenBuDetailController@save_phieudenbu');
+Route::get('/print_phieudenbu/{phieudenbu_id}', 'PhieuDenBuDetailController@print_phieudenbu');
+Route::get('/show_phieudenbudetail/{phieudenbu_id}', 'PhieuDenBuDetailController@show_phieudenbudetail');
+

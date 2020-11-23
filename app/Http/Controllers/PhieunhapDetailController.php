@@ -55,6 +55,8 @@ class PhieunhapDetailController extends Controller
                 'phieunhapDetail_cost' => $request->phieunhapDetail_cost[$item],
                 'phieunhapDetail_nums' => $request->phieunhapDetail_nums[$item],
                 'phieunhapDetail_dvt' => $request->dvt[$item],
+                'phieunhapDetail_hsx' => $request->phieunhapDetail_hsx[$item],
+                'phieunhapDetail_hsd' => $request->phieunhapDetail_hsd[$item],
                 'phieunhapDetail_price' => $request->phieunhapDetail_cost[$item]*$request->phieunhapDetail_nums[$item]
             );
         PhieuNhap::insert($data2);
@@ -67,6 +69,7 @@ class PhieunhapDetailController extends Controller
     public function show_phieunhapdetail($phieunhap_id)
     {
         $this->AuthLogin();
+        $now=Carbon::now('Asia/Ho_Chi_Minh');
         $detail_phieunhap = DB::table('tbl_phieunhapdetail')
             ->join('tbl_nguyenlieu', 'tbl_phieunhapdetail.nguyenlieu_id', '=', 'tbl_nguyenlieu.nguyenlieu_id')
             ->join('tbl_phieunhap', 'tbl_phieunhapdetail.phieunhap_id', '=', 'tbl_phieunhap.phieunhap_id')
@@ -135,10 +138,12 @@ class PhieunhapDetailController extends Controller
                                 <th style=" font-size:8px ;border: 1px solid; padding:1px;" width="75px">Thời gian bắt đầu</th>
                                 <th style="font-size:8px ;border: 1px solid; padding:1px;" width="75px">Thời gian kết thúc</th>
                                 <th style="font-size:8px ;border: 1px solid; padding:1px;" width="45px">Stt</th>-->
-                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px">Sản phẩm</th>
-                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px">Số lượng</th>
-                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px">Giá</th>
-                                 <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px">Thành tiền</th>
+                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="40px">Sản phẩm</th>
+                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="30px">Số lượng</th>
+                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px">Giá</th>
+                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="60px">Ngày sản xuất</th>
+                                <th style="font-size:8px ;border: 1px solid; padding:1px;" width="60px">Hạn sử dụng</th>
+                                 <th style="font-size:8px ;border: 1px solid; padding:1px;" width="70px">Thành tiền</th>
                   </tr>
                   </thead>
                         </table>';
@@ -154,10 +159,12 @@ class PhieunhapDetailController extends Controller
                   <thead>
                  <tr>
 
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;"width="90px";>' . $detail->nguyenlieu_name . '</th>
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px";>' . $detail->phieunhapDetail_nums . '</th>
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px";>' . number_format($detail->phieunhapDetail_cost, 0, ',', '.') . 'đ' . '</th>
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px";>' . number_format($subtotal, 0, ',', '.') . 'đ' . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;"width="40px";>' . $detail->nguyenlieu_name . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="30px";>' . $detail->phieunhapDetail_nums . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px";>' . number_format($detail->phieunhapDetail_cost, 0, ',', '.') . 'đ' . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="60px";>' . $detail->phieunhapDetail_hsx . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="60px";>' . $detail->phieunhapDetail_hsd . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="70px";>' . number_format($subtotal, 0, ',', '.') . 'đ' . '</th>
 
                   </tr>
                   </thead>

@@ -41,7 +41,7 @@ class BanCafeController extends Controller
         $data = array();
         $data['bancafe_name'] = $request->bancafe_name;
         $data['khuvuc_id'] = $request->kv_ban;
-        $data['bancafe_status'] = $request->bancafe_status;
+        $data['bancafe_status'] = 0;
         DB::table('tbl_bancafe')->insert($data);
         Session::put('message','Thêm bàn thành công');
         return Redirect::to('add_bancafe');

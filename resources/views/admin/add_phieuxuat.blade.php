@@ -16,12 +16,19 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th scope="col">Mã lô</th>
                                     <th scope="col">Nguyên liệu</th>
-                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Số lượng xuất</th>
                                     <th scope="col">Đơn vị tính</th>
+                                    <th scope="col">Ngày sản xuất</th>
+                                    <th scope="col">Hạn sử dụng</th>
+                                    <th scope="col">Sản phẩm</th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
+                                        <th scope="col"><input type="text"; width="100%" name="phieunhapDetail_malo[]"></th>
+
                                         <th scope="col-md-4">
                                             <select name="nguyenlieu_name[]" class="form-control input-sm m-bot15">
                                             @foreach($name_nguyenlieu as $key => $add)
@@ -29,7 +36,9 @@
                                             @endforeach
                                             </select>
                                         </th>
+
                                         <th scope="col"><input type="text"; width="100%" name="phieuxuatDetail_nums[]"></th>
+
                                         <th scope="col">
                                             <select name="dvt[]" class="form-control input-sm m-bot15">
                                                 <option>KG</option>
@@ -39,6 +48,18 @@
                                                 <option>Vỉ</option>
                                             </select>
                                         </th>
+
+                                        <th scope="col"><input type="date"; width="100%" name="phieunhapDetail_hsx[]"></th>
+                                        <th scope="col"><input type="date"; width="100%" name="phieunhapDetail_hsd[]"></th>
+
+                                        <th scope="col-md-4">
+                                            <select name="sanpham_name[]" class="form-control input-sm m-bot15">
+                                            @foreach($sanpham_name as $key => $add)
+                                            <option value="{{$add->sanpham_id}}">{{$add->sanpham_name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </th>
+
                                         <th ><button class="btn btn-success" type="button" id="add_more_detail">Thêm</button></th>
                                 </tbody>
                             </table>
@@ -56,6 +77,7 @@
                         html += '<div id="inputFormRow">';
                         html += '<table class="table table-bordered">';
                         html += '  <tbody>';
+                        html += '  <th scope="col"><input type="text"; width="100%" name="phieunhapDetail_malo[]"></th>';
                         html += '  <th scope="col">';
                         html += '  <select name="nguyenlieu_name[]" class="form-control input-sm m-bot15">';
                         html += '  @foreach($name_nguyenlieu as $key => $add)';
@@ -70,6 +92,15 @@
                         html += '  <option>Thùng</option>';
                         html += '  <option>Lô</option>';
                         html += '  <option>Túi</option>';
+                        html += '  </select>';
+                        html += '  </th>';
+                        html += '  <th scope="col"><input type="date"; width="100%" name="phieunhapDetail_hsx[]"></th>';
+                        html += '  <th scope="col"><input type="date"; width="100%" name="phieunhapDetail_hsd[]"></th>';
+                        html += '  <th scope="col>';
+                        html += '  <select name="sanpham_name[]" class="form-control input-sm m-bot15">';
+                        html += '  @foreach($sanpham_name as $key => $add)';
+                        html += '  <option value="{{$add->sanpham_id}}">{{$add->sanpham_name}}</option>';
+                        html += '  @endforeach';
                         html += '  </select>';
                         html += '  </th>';
                         html += '<div class="input-group-append">';

@@ -25,8 +25,9 @@ class HoadonCafeDetailController extends Controller
 
         $detail_hoadoncafe = DB::table('tbl_hoadoncafedetail')
             ->join('tbl_sanpham','tbl_hoadoncafedetail.sanpham_id','=','tbl_sanpham.sanpham_id')
-            ->join('tbl_bancafe', 'tbl_hoadoncafedetail.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
+            
             ->join('tbl_hoadoncafe','tbl_hoadoncafedetail.hoadoncafe_id','=','tbl_hoadoncafe.hoadoncafe_id')
+            ->join('tbl_bancafe', 'tbl_hoadoncafe.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
             ->orderby('tbl_hoadoncafedetail.hoadoncafe_id', 'desc')->get()->where('hoadoncafe_id',$hoadoncafe_id);
         $manager_hoadoncafedetail = view('admin.show_hoadoncafedetail')->with('show_hoadoncafedetail',$detail_hoadoncafe);
         return view('Admin_Layout')->with('admin.show_hoandoncafedetail', $manager_hoadoncafedetail);
@@ -41,8 +42,8 @@ class HoadonCafeDetailController extends Controller
         return $data;*/
         $data = DB::table('tbl_hoadoncafedetail')
             ->join('tbl_sanpham','tbl_hoadoncafedetail.sanpham_id','=','tbl_sanpham.sanpham_id')
-            ->join('tbl_bancafe', 'tbl_hoadoncafedetail.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
             ->join('tbl_hoadoncafe','tbl_hoadoncafedetail.hoadoncafe_id','=','tbl_hoadoncafe.hoadoncafe_id')
+            ->join('tbl_bancafe', 'tbl_hoadoncafe.bancafe_id', '=', 'tbl_bancafe.bancafe_id')
             ->orderby('tbl_hoadoncafedetail.hoadoncafe_id', 'desc')->get()->where('hoadoncafe_id',$hoadoncafe_id);
         return $data;
     }

@@ -26,16 +26,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($thongke_phieuthue as $key => $thongke)
+                    @foreach($thongke_hoadonkaraoke as $key => $thongke)
                         <tr>
                             <td>{{$thongke->phong_name}}</td>
-                            <td>{{$thongke->phieuthue_timein}}</td>
-                            <td>{{$thongke->phieuthue_timeout}}</td>
-                            <td>{{$thongke->phieuthue_nguoi}}</td>
-                            <td>{{$thongke->phieuthue_price}}</td>
+                            <td>{{$thongke->hoadonkaraoke_timein}}</td>
+                            <td>{{$thongke->hoadonkaraoke_timeout}}</td>
+                            <td>{{$thongke->hoadonkaraoke_nguoi}}</td>
+                            <td>{{$thongke->hoadonkaraoke_price}}</td>
                             <td>
-                                {{--                                @foreach($detail_phieuthue as $key => $detail)--}}
-                                <a href="{{URL::to('/show_phieuthuedetail/'.$thongke->phieuthue_id)}}" class="active styling edit" ui-toggle-class="">
+                                {{--                                @foreach($detail_hoadonkaraoke as $key => $detail)--}}
+                                <a href="{{URL::to('/show_hoadonkaraokedetail/'.$thongke->hoadonkaraoke_id)}}" class="active styling edit" ui-toggle-class="">
                                     <i class="fa fa-file-text-o"></i></a>
                                 {{--                                @endforeach--}}
                             </td>

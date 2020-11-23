@@ -3,7 +3,7 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Phiếu nhập
+                Phiếu xuất
             </div>
         </div>
         <div class="table-responsive">
@@ -18,7 +18,7 @@
                 <thead>
                 <tr>
                     <th>Người nhập</th>
-                    <th>Ngày nhập</th>
+                    <th>Ngày xuất</th>
                     <th style="width:30px;"></th>
                 </tr>
                 </thead>

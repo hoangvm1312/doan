@@ -9,7 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use PDF;
 session_start();
-class PhieuThueDetailController extends Controller
+class HoaDonKaraokeDetailController extends Controller
 {
     public function AuthLogin()
     {
@@ -21,36 +21,36 @@ class PhieuThueDetailController extends Controller
         }
     }
 
-    public function show_phieuthuedetail($phieuthue_id)
+    public function show_hoadonkaraokedetail($hoadonkaraoke_id)
     {
         $this->AuthLogin();
-        $detail_phieuthue = DB::table('tbl_phieuthuedetail')
-            ->join('tbl_sanpham', 'tbl_phieuthuedetail.sanpham_id', '=', 'tbl_sanpham.sanpham_id')
-            ->join('tbl_phong', 'tbl_phieuthuedetail.phong_id', '=', 'tbl_phong.phong_id')
-            ->join('tbl_phieuthue', 'tbl_phieuthuedetail.phieuthue_id', '=', 'tbl_phieuthue.phieuthue_id')
-            ->orderby('tbl_phieuthuedetail.phieuthue_id','desc')->get()->where('phieuthue_id',$phieuthue_id);
-        $manager_phieuthuedetail = view('admin.show_phieuthuedetail')->with('show_phieuthuedetail', $detail_phieuthue);
-        return view('Admin_Layout')->with('admin.show_phieuthuedetail', $manager_phieuthuedetail);
+        $detail_hoadonkaraoke = DB::table('tbl_hoadonkaraokedetail')
+            ->join('tbl_sanpham', 'tbl_hoadonkaraokedetail.sanpham_id', '=', 'tbl_sanpham.sanpham_id')
+            ->join('tbl_hoadonkaraoke', 'tbl_hoadonkaraokedetail.hoadonkaraoke_id', '=', 'tbl_hoadonkaraoke.hoadonkaraoke_id')
+            ->join('tbl_phong', 'tbl_hoadonkaraoke.phong_id', '=', 'tbl_phong.phong_id')
+            ->orderby('tbl_hoadonkaraokedetail.hoadonkaraoke_id','desc')->get()->where('hoadonkaraoke_id',$hoadonkaraoke_id);
+        $manager_hoadonkaraokedetail = view('admin.show_hoadonkaraokedetail')->with('show_hoadonkaraokedetail', $detail_hoadonkaraoke);
+        return view('Admin_Layout')->with('admin.show_hoadonkaraokedetail', $manager_hoadonkaraokedetail);
     }
-    function get_data($phieuthue_id)
+    function get_data($hoadonkaraoke_id)
     {
-        $data= DB::table('tbl_phieuthuedetail')
-            ->join('tbl_sanpham', 'tbl_phieuthuedetail.sanpham_id', '=', 'tbl_sanpham.sanpham_id')
-            ->join('tbl_phong', 'tbl_phieuthuedetail.phong_id', '=', 'tbl_phong.phong_id')
-            ->join('tbl_phieuthue', 'tbl_phieuthuedetail.phieuthue_id', '=', 'tbl_phieuthue.phieuthue_id')
-            ->orderby('tbl_phieuthuedetail.phieuthue_id', 'desc')->get()->where('phieuthue_id',$phieuthue_id);
+        $data= DB::table('tbl_hoadonkaraokedetail')
+            ->join('tbl_sanpham', 'tbl_hoadonkaraokedetail.sanpham_id', '=', 'tbl_sanpham.sanpham_id')
+            ->join('tbl_hoadonkaraoke', 'tbl_hoadonkaraokedetail.hoadonkaraoke_id', '=', 'tbl_hoadonkaraoke.hoadonkaraoke_id')
+            ->join('tbl_phong', 'tbl_hoadonkaraoke.phong_id', '=', 'tbl_phong.phong_id')
+            ->orderby('tbl_hoadonkaraokedetail.hoadonkaraoke_id', 'desc')->get()->where('hoadonkaraoke_id',$hoadonkaraoke_id);
         return $data;
     }
-    public function print_phieuthue($phieuthue_id){
+    public function print_hoadonkaraoke($hoadonkaraoke_id){
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->print_phieuthuedetail($phieuthue_id));
+        $pdf->loadHTML($this->print_hoadonkaraokedetail($hoadonkaraoke_id));
         $pdf->setPaper('A6');
         return $pdf->stream();
     }
 
-    public function print_phieuthuedetail($phieuthue_id)
+    public function print_hoadonkaraokedetail($hoadonkaraoke_id)
     {
-        $data = $this->get_data($phieuthue_id);
+        $data = $this->get_data($hoadonkaraoke_id);
         $output = '';
         $output .= '<style> body{
                            font-family: DejaVu Sans ;
@@ -70,9 +70,9 @@ class PhieuThueDetailController extends Controller
         <table class="table styling">
         <thead>
         <tr>
-                                   <li style=" font-family:DejaVu Sans; font-size:12px; list-style-type:none;"width="75px">Khách hàng: '.$detail->phieuthue_nguoi.'</li>
+                                   <li style=" font-family:DejaVu Sans; font-size:12px; list-style-type:none;"width="75px">Khách hàng: '.$detail->hoadonkaraoke_nguoi.'</li>
                                    <li style=" font-size:9px ;list-style-type:none" width="80px">Phòng: '.$detail->phong_name.'</li>
-                                   <li style=" font-size:9px ;list-style-type:none" width="80px">MHĐ: '.$detail->phieuthue_id.'</li>
+                                   <li style=" font-size:9px ;list-style-type:none" width="80px">MHĐ: '.$detail->hoadonkaraoke_id.'</li>
         </tr>
         </thead>
         </table>';
@@ -83,9 +83,9 @@ class PhieuThueDetailController extends Controller
         <thead>
         <tr>
                                </li>
-                                   <th style=" font-size:10px ;list-style-type:none"; width="75px">Giờ vào: '.$detail->phieuthue_timein.'</th>
-                                   <th style=" font-size:10px; list-style-type:none;"width="75px">Giờ ra: '.$detail->phieuthue_timeout.'</th>
-                                   <a><b>Phí thuê phòng hát: '.number_format($detail->phieuthue_price,0,',','.').'đ'.'<b></a>>
+                                   <th style=" font-size:10px ;list-style-type:none"; width="75px">Giờ vào: '.$detail->hoadonkaraoke_timein.'</th>
+                                   <th style=" font-size:10px; list-style-type:none;"width="75px">Giờ ra: '.$detail->hoadonkaraoke_timeout.'</th>
+                                   <a><b>Phí thuê phòng hát: '.number_format($detail->hoadonkaraoke_price,0,',','.').'đ'.'<b></a>>
         </tr>
         </thead>
         </table>';
@@ -110,7 +110,7 @@ class PhieuThueDetailController extends Controller
 
         }
             foreach($data as $key => $detail) {
-                $subtotal = $detail->phieuthueDetail_nums*$detail->phieuthueDetail_price;
+                $subtotal = $detail->hoadonkaraokeDetail_nums*$detail->hoadonkaraokeDetail_price;
                 $total += $subtotal;
                 $output .= '
 <table class="table styling">
@@ -118,11 +118,11 @@ class PhieuThueDetailController extends Controller
                  <tr>
 
                                    <!--<th style=" font-size:8px ;" width="80px">Phòng:' . $detail->phong_name . '</th><br>
-                                   <th style=" font-size:8px ;" width="75px">Thời gian bắt đầu' . $detail->phieuthue_timein . '</th>
-                                   <th style=" font-size:8px ;width="75px">Thời gian kết thúc:' . $detail->phieuthue_timeout . '</th>-->
+                                   <th style=" font-size:8px ;" width="75px">Thời gian bắt đầu' . $detail->hoadonkaraoke_timein . '</th>
+                                   <th style=" font-size:8px ;width="75px">Thời gian kết thúc:' . $detail->hoadonkaraoke_timeout . '</th>-->
                                    <th style="font-size:8px ;border: 1px solid; padding:1px;"width="90px";>' . $detail->sanpham_name . '</th>
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px";>' . $detail->phieuthueDetail_nums . '</th>
-                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px";>' . number_format($detail->phieuthueDetail_price, 0, ',', '.') . 'đ' . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="50px";>' . $detail->hoadonkaraokeDetail_nums . '</th>
+                                   <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px";>' . number_format($detail->hoadonkaraokeDetail_price, 0, ',', '.') . 'đ' . '</th>
                                    <th style="font-size:8px ;border: 1px solid; padding:1px;" width="90px";>' . number_format($subtotal, 0, ',', '.') . 'đ' . '</th>
 
                   </tr>
@@ -133,7 +133,7 @@ class PhieuThueDetailController extends Controller
 <table>
 <tr>
 				<td colspan="2">
-					<p style="font-size: 12px"><b>Thanh toán : '.number_format($total + $detail->phieuthue_price,0,',','.').'đ'.'</b></p>
+					<p style="font-size: 12px"><b>Thanh toán : '.number_format($total + $detail->hoadonkaraoke_price,0,',','.').'đ'.'</b></p>
 				</td>
 		</tr>
 		</table>';

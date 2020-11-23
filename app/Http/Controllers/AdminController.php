@@ -13,6 +13,7 @@ use App\SanPham;
 use App\BanCafe;
 use App\NguyenLieu;
 use App\KhuVuc;
+use App\HoaDonCafeDetail;
 session_start();
 class AdminController extends Controller
 
@@ -39,6 +40,12 @@ class AdminController extends Controller
         $sanpham = SanPham::all()->count();
         $ban = BanCafe::all()->count();
         $nguyenlieu = NguyenLieu::all()->count();
+        
+        //$post = HoaDonCafeDetail::all()->count();
+
+        // $bestsale = HoaDonCafeDetail::orderBy('$hoadoncafeDetail_nums','desc')->take(20)->get();
+
+
         return view('admin.dashboard')->with(compact('phong','khuvuc','sanpham','ban','nguyenlieu'));
     }
 
@@ -46,7 +53,7 @@ class AdminController extends Controller
     {
         $this->AuthLogin();
         $admin_email = $request->admin_email;
-        $admin_password = md5($request->admin_password);
+        $admin_password = ($request->admin_password);
         $result = DB::table('tbl_admin')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
         if (($result)) {
           Session::put('admin_name',$result->admin_name);
@@ -129,5 +136,6 @@ class AdminController extends Controller
             );
         }
         echo $data = json_encode($chart_data);
+
     }
 }

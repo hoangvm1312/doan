@@ -12,11 +12,13 @@
             <table class="table table-striped b-t b-light" id="myTable">
                 <thead>
                 <tr>
-                    </th>
                     <th>Nguyên liệu</th>
-                    <th>Giá</th>
+                    <th>Đơn giá nhập</th>
                     <th>Số lượng</th>
+                    <th>Ngày sản xuất</th>
+                    <th>Hạn sử dụng</th>
                     <th>Thành tiền</th>
+                    
                     <th style="width:30px;"></th>
                 </tr>
                 </thead>
@@ -26,6 +28,8 @@
                         <td>{{$detail->nguyenlieu_name}}</td>
                         <td>{{$detail->phieunhapDetail_cost}}</td>
                         <td>{{$detail->phieunhapDetail_nums}}</td>
+                        <td>{{$detail->phieunhapDetail_hsx}}</td>
+                        <td>{{$detail->phieunhapDetail_hsd}}</td>
                         <td>{{$detail->phieunhapDetail_price}}</td>
                     </tr>
                 @endforeach

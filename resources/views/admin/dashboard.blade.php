@@ -39,9 +39,27 @@
     <div id="chart" style="height: 250px;"></div>
     </div>
 <div  class="row">
+
     <div class="col-md-4 col-xs-12">
     <p class="title_thongke">Thống kê sản phẩm</p>
     <div id="donut"></div>
+    </div>
+
+    <div class="col-md-4 col-xs-12">
+    <style type="text.css">
+    ol.list_views{
+        margin:10px 0;
+        color: #fff;
+    }
+    ol.list_views a{
+        color:orange;
+        font-weight:400;
+    }
+    </style>
+    <h1>Sản phẩm bán chạy</h1>
+    <ol class="list_views">
+
+    </ol>
     </div>
 </div>
 @endsection

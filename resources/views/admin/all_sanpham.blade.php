@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{$pro->sanpham_name}}</td>
                             <td>{{$pro->sanpham_price}}</td>
-                            <td><img src="public/uploads/sanpham/{{$pro->sanpham_image}}"height="100" width="100"></td>
+                            <td><img src="public/uploads/product/{{$pro->sanpham_image}}"height="100" width="100"></td>
                             <td>{{$pro->loaisanpham_name}}</td>
                             <td>{{$pro->dvt_name}}</td>
                             <td>
